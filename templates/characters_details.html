@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{.Name}} - Valorant</title>
-    <link rel="stylesheet" href="/Static/css/character_details.css">
-    <link rel="stylesheet" href="/Static/css/header.css">
+    <link rel="stylesheet" href="/static/css/character_details.css">
+    <link rel="stylesheet" href="/static/css/header.css">
 </head>
 <body>
     {{template "header.html" .}}
     <main>
         <section id="character-details">
             <h2>{{.Name}}</h2>
-            <img src="{{.Image}}" alt="{{.Name}}">
+            <img class="character-image" src="{{.Image}}" alt="{{.Name}}">
             <p>{{.Description}}</p>
             <h3>Passif</h3>
             <p>{{.Passive}}</p>
@@ -21,8 +21,8 @@
                 {{range .Abilities}}
                 <div class="ability">
                     <h4>{{.Name}}</h4>
-                    <button onclick="showAbilityDetails('{{.Name}}', '{{.Description}}', '{{.Image}}', '{{.VideoURL}}')">
-                        <img src="{{.Image}}" alt="{{.Name}}">
+                    <button onclick="showAbilityDetails('{{.Name}}', '{{.Description}}', '{{.Image}}', '{{.VideoURL}}', '{{.IsVideo}}')">
+                        <img class="ability-image" src="{{.Image}}" alt="{{.Name}}">
                     </button>
                 </div>
                 {{end}}
@@ -36,22 +36,17 @@
         </section>
         <section id="ability-details" style="display: none;">
             <h3 id="ability-name"></h3>
-            <img id="ability-image" src="" alt="">
+            <img id="ability-image" src="" alt="" style="display: none;">
             <p id="ability-description"></p>
-            <iframe id="ability-video" width="560" height="315" src="" frameborder="0" allowfullscreen></iframe>
+            <video id="ability-video" class="ability-video" controls style="display: none;">
+                <source id="ability-video-source" muted autoplay loop>
+                Your browser does not support the video tag.
+            </video>
         </section>
     </main>
     <footer>
         <p>&copy; 2025 Valorant Fan Page</p>
     </footer>
-    <script>
-        function showAbilityDetails(name, description, image, videoURL) {
-            document.getElementById('ability-name').innerText = name;
-            document.getElementById('ability-description').innerText = description;
-            document.getElementById('ability-image').src = image;
-            document.getElementById('ability-video').src = videoURL;
-            document.getElementById('ability-details').style.display = 'block';
-        }
-    </script>
+    <script src="/static/js/characters_details.js"></script>
 </body>
 </html>

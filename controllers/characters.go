@@ -12,6 +12,7 @@ type Ability struct {
     Description string `json:"description"`
     Image       string `json:"displayIcon"`
     VideoURL    string `json:"videoURL"`
+    IsVideo     bool   `json:"isVideo"`
 }
 
 type Agent struct {
@@ -62,33 +63,50 @@ func FetchAgentsFromAPI() ([]Agent, error) {
             RoleIcon:    apiAgent.Role.DisplayIcon,
         }
         for _, ability := range apiAgent.Abilities {
+            videoURL := ""
+            isVideo := false
+            if strings.ToLower(agent.Name) == "sage" {
+                switch strings.ToLower(ability.DisplayName) {
+                case "barrier orb":
+                    videoURL = "/static/video/barrier_orb.png"
+                    isVideo = true
+                case "slow orb":
+                    videoURL = "/static/vidéo/slow_orb.mp4"
+                    isVideo = true
+                case "healing orb":
+                    videoURL = "/static/img/healing_orb.png"
+                case "resurrection":
+                    videoURL = "/static/img/resurrection.png"
+                }
+            }
             agent.Abilities = append(agent.Abilities, Ability{
                 Name:        ability.DisplayName,
                 Description: ability.Description,
                 Image:       ability.DisplayIcon,
-                VideoURL:    "https://www.youtube.com/embed/" + getYouTubeVideoID(ability.DisplayName), // Remplacez par l'URL de la vidéo appropriée
+                VideoURL:    videoURL,
+                IsVideo:     isVideo,
             })
         }
         agents = append(agents, agent)
     }
     return agents, nil
 }
+    
 
-func getYouTubeVideoID(abilityName string) string {
-    // Remplacez cette fonction par une logique pour obtenir l'ID de la vidéo YouTube appropriée pour chaque compétence
+/*func getYouTubeVideoID(abilityName string) string {
     switch abilityName {
     case "Cloudburst":
-        return "dQw4w9WgXcQ" // Remplacez par l'ID de la vidéo YouTube appropriée
+        return "dQw4w9WgXcQ"
     case "Updraft":
-        return "dQw4w9WgXcQ" // Remplacez par l'ID de la vidéo YouTube appropriée
+        return "dQw4w9WgXcQ"
     case "Tailwind":
-        return "dQw4w9WgXcQ" // Remplacez par l'ID de la vidéo YouTube appropriée
+        return "dQw4w9WgXcQ"
     case "Blade Storm":
         return "dQw4w9WgXcQ" // Remplacez par l'ID de la vidéo YouTube appropriée
     default:
         return ""
     }
-}
+}*/
 
 func HandleCharacters(w http.ResponseWriter, r *http.Request) {
     agents, err := FetchAgentsFromAPI()
@@ -96,7 +114,6 @@ func HandleCharacters(w http.ResponseWriter, r *http.Request) {
         http.Error(w, "Error fetching agents: "+err.Error(), http.StatusInternalServerError)
         return
     }
-
     tmpl, err := template.ParseFiles("templates/characters.html", "templates/header.html")
     if err != nil {
         http.Error(w, "Error loading template: "+err.Error(), http.StatusInternalServerError)
@@ -120,10 +137,9 @@ func HandleCharacterDetails(w http.ResponseWriter, r *http.Request) {
         http.Error(w, "Error fetching agents: "+err.Error(), http.StatusInternalServerError)
         return
     }
-
     var agent Agent
     for _, a := range agents {
-        if strings.ToLower(a.Name) == strings.ToLower(name) {
+        if strings.EqualFold(a.Name, name) {
             agent = a
             break
         }
@@ -132,7 +148,6 @@ func HandleCharacterDetails(w http.ResponseWriter, r *http.Request) {
         http.NotFound(w, r)
         return
     }
-
     tmpl, err := template.ParseFiles("templates/characters_details.html", "templates/header.html")
     if err != nil {
         http.Error(w, "Error loading template: "+err.Error(), http.StatusInternalServerError)

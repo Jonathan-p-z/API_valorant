@@ -6,16 +6,6 @@ body {
     color: white;
 }
 
-header {
-    background-color: #ff4655;
-    padding: 20px;
-    text-align: center;
-}
-
-header h1 {
-    margin: 0;
-}
-
 main {
     padding: 20px;
 }
@@ -24,10 +14,16 @@ main {
     text-align: center;
 }
 
-#character-details img {
-    width: 200px; /* Taille moyenne pour l'image principale */
+.character-image {
+    width: 300px; /* Taille spécifique pour l'image de Sage */
     border-radius: 10px;
     margin: 20px 0;
+}
+
+.ability-image {
+    width: 75px; /* Taille spécifique pour les icônes de compétence */
+    height: 75px;
+    margin-bottom: 10px;
 }
 
 .abilities-container {
@@ -43,7 +39,7 @@ main {
     border-radius: 10px;
     padding: 10px;
     text-align: center;
-    width: 150px; /* Taille ajustée pour les cartes de compétence */
+    width: 200px; /* Taille ajustée pour les cartes de compétence */
 }
 
 .ability button {
@@ -51,12 +47,6 @@ main {
     border: none;
     padding: 0;
     cursor: pointer;
-}
-
-.ability img {
-    width: 75px; /* Taille moyenne pour les icônes de compétence */
-    height: 75px;
-    margin-bottom: 10px;
 }
 
 .images-container {
@@ -80,4 +70,17 @@ main {
     width: 150px; /* Taille moyenne pour l'image de détail de la compétence */
     height: 150px;
     margin-bottom: 10px;
+}
+
+.ability-video {
+    width: 560px; /* Taille spécifique pour la vidéo de la compétence */
+    height: 315px;
+    margin-bottom: 10px;
+    
+}
+
+#ability-details video {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }

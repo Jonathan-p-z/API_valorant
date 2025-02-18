@@ -6,8 +6,26 @@ body {
     color: white;
 }
 
+header {
+    background-color: #ff4655;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+}
+
 main {
     padding: 20px;
+}
+
+#weapons {
+    text-align: center;
+}
+
+.weapons-category {
+    margin-bottom: 40px;
 }
 
 .weapons-container {
@@ -37,7 +55,7 @@ main {
     border-radius: 10px;
 }
 
-.weapon-card h2 {
+.weapon-card h3 {
     margin: 10px 0 5px;
     font-size: 1.5em;
 }
@@ -45,4 +63,16 @@ main {
 .weapon-card p {
     font-size: 1em;
     color: #d1d5db;
+}
+
+.weapon-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0;
+    font-size: 0.9em;
+    color: #d1d5db;
+}
+
+.weapon-card ul li {
+    margin-bottom: 5px;
 }
