@@ -1,0 +1,10 @@
+{
+    "go.formatTool": "gofmt",
+    "go.useLanguageServer": true,
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": true
+    },
+    "go.toolsManagement.autoUpdate": true
+  }
+  

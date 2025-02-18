@@ -1,0 +1,47 @@
+package api
+
+import (
+	"fmt"
+	"io/ioutil"
+	"net/http"
+)
+
+// FetchData récupère des données d'une API externe
+func FetchData(apiURL string) ([]byte, error) {
+	resp, err := http.Get(apiURL)
+	if err != nil {
+		return nil, fmt.Errorf("Erreur API : %v", err)
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("Erreur HTTP %d : %s", resp.StatusCode, resp.Status)
+	}
+
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return nil, fmt.Errorf("Erreur lecture réponse : %v", err)
+	}
+
+	return body, nil
+}
+
+// Structure pour représenter un agent
+
+
+// FetchAgents récupère la liste des agents depuis l'API Valorant
+func FetchAgents() ([]Agent, error) {
+	const url = "https://valorant-api.com/v1/agents"
+	resp, err := http.Get(url)
+	if err != nil {
+		return nil, fmt.Errorf("erreur lors de la requête API : %v", err)
+	}
+	defer resp.Body.Close()
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("erreur HTTP %d : %s", resp.StatusCode, resp.Status)
+	}
+	var result struct {
+		Data []Agent `json:"data"`
+	}
+	return result.Data, nil
+}

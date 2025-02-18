@@ -1,0 +1,67 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #0f1923;
+    color: white;
+}
+
+header {
+    background-color: #ff4655;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+}
+
+main {
+    padding: 20px;
+}
+
+.agents-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.agent-card {
+    background-color: #1f2937;
+    border: 1px solid #394b59;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    width: 400px;
+    position: relative;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.agent-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+.agent-card img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.agent-card .role-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+}
+
+.agent-card h3 {
+    margin: 10px 0 5px;
+    font-size: 1.2em;
+}
+
+.agent-card p {
+    font-size: 0.9em;
+    color: #d1d5db;
+}

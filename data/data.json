@@ -1,0 +1,27 @@
+[
+    {
+      "Email": "jperez13111@gmail.com",
+      "Password": "password",
+      "Collecttions": {
+        "Characters": null,
+        "Domains": null,
+        "Enemies": null,
+        "Weapons": null,
+        "skins": {
+          "bundle": null
+        }
+      }
+    },
+    {
+      "Email": "yaiitoexod@gmail.com",
+      "Password": "password",
+      "Collecttions": {
+        "Characters": null,
+        "Enemies": null,
+        "Weapons": null,
+        "skins": {
+          "Bundles": null
+        }
+      }
+    }
+  ]

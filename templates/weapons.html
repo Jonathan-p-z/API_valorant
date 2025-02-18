@@ -1,0 +1,20 @@
+<!DOCTYPE weapons>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Armes Valorant</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <h1>Armes Valorant</h1>
+    <div class="weapons">
+        {{range .}}
+        <div class="weapon">
+            <h2>{{.Name}}</h2>
+            <img src="{{.Image}}" alt="{{.Name}}">
+        </div>
+        {{end}}
+    </div>
+</body>
+</html>

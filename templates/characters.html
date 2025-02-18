@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Characters - Valorant</title>
+    <link rel="stylesheet" href="/Static/css/characters.css">
+    <link rel="stylesheet" href="/Static/css/header.css">
+</head>
+<body>
+    {{template "header.html" .}}
+    <main>
+        <section id="agents">
+            <h2>Nos Agents</h2>
+            <div class="agents-container">
+                {{range .Agents}}
+                <div class="agent-card">
+                    <img src="{{.Image}}" alt="{{.Name}}" onerror="this.onerror=null;this.src='/Static/img/error.png';">
+                    <img src="{{.RoleIcon}}" alt="Role Icon" class="role-icon">
+                    <h3>{{.Name}}</h3>
+                    <p>{{.Description}}</p>
+                </div>
+                {{end}}
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Valorant Fan Page</p>
+    </footer>
+</body>
+</html>

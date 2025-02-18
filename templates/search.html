@@ -1,0 +1,21 @@
+<!DOCTYPE search>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recherche</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <h1>Résultats de la recherche</h1>
+    <div class="results">
+        {{range .}}
+        <div class="result-item">
+            <h2>{{.Name}}</h2>
+            <img src="{{.Image}}" alt="{{.Name}}">
+            <p>{{.Description}}</p>
+        </div>
+        {{end}}
+    </div>
+</body>
+</html>
