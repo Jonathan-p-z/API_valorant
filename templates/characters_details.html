@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{.Name}} - Valorant</title>
+    <link rel="stylesheet" href="/Static/css/character_details.css">
+    <link rel="stylesheet" href="/Static/css/header.css">
+</head>
+<body>
+    {{template "header.html" .}}
+    <main>
+        <section id="character-details">
+            <h2>{{.Name}}</h2>
+            <img src="{{.Image}}" alt="{{.Name}}">
+            <p>{{.Description}}</p>
+            <h3>Passif</h3>
+            <p>{{.Passive}}</p>
+            <h3>Compétences</h3>
+            <div class="abilities-container">
+                {{range .Abilities}}
+                <div class="ability">
+                    <h4>{{.Name}}</h4>
+                    <button onclick="showAbilityDetails('{{.Name}}', '{{.Description}}', '{{.Image}}', '{{.VideoURL}}')">
+                        <img src="{{.Image}}" alt="{{.Name}}">
+                    </button>
+                </div>
+                {{end}}
+            </div>
+            <h3>Images</h3>
+            <div class="images-container">
+                {{range .Images}}
+                <img src="{{.}}" alt="{{$.Name}}">
+                {{end}}
+            </div>
+        </section>
+        <section id="ability-details" style="display: none;">
+            <h3 id="ability-name"></h3>
+            <img id="ability-image" src="" alt="">
+            <p id="ability-description"></p>
+            <iframe id="ability-video" width="560" height="315" src="" frameborder="0" allowfullscreen></iframe>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Valorant Fan Page</p>
+    </footer>
+    <script>
+        function showAbilityDetails(name, description, image, videoURL) {
+            document.getElementById('ability-name').innerText = name;
+            document.getElementById('ability-description').innerText = description;
+            document.getElementById('ability-image').src = image;
+            document.getElementById('ability-video').src = videoURL;
+            document.getElementById('ability-details').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

@@ -35,12 +35,13 @@ main {
     text-align: center;
     width: 400px;
     position: relative;
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
 }
 
 .agent-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    background-color: #ff4655; /* Changement de couleur en rouge */
 }
 
 .agent-card img {

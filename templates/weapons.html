@@ -1,20 +1,30 @@
-<!DOCTYPE weapons>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Armes Valorant</title>
-    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/Static/css/weapons.css">
+    <link rel="stylesheet" href="/Static/css/header.css">
 </head>
 <body>
-    <h1>Armes Valorant</h1>
-    <div class="weapons">
-        {{range .}}
-        <div class="weapon">
-            <h2>{{.Name}}</h2>
-            <img src="{{.Image}}" alt="{{.Name}}">
-        </div>
-        {{end}}
-    </div>
+    {{template "header.html" .}}
+    <main>
+        <section id="weapons">
+            <h1>Armes Valorant</h1>
+            <div class="weapons-container">
+                {{range .}}
+                <div class="weapon-card">
+                    <img src="{{.Image}}" alt="{{.Name}}">
+                    <h2>{{.Name}}</h2>
+                    <p>{{.Type}}</p>
+                </div>
+                {{end}}
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Valorant Fan Page</p>
+    </footer>
 </body>
 </html>

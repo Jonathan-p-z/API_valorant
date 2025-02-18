@@ -15,7 +15,9 @@
             <div class="agents-container">
                 {{range .Agents}}
                 <div class="agent-card">
-                    <img src="{{.Image}}" alt="{{.Name}}" onerror="this.onerror=null;this.src='/Static/img/error.png';">
+                    <a href="/character/{{.Name}}">
+                        <img src="{{.Image}}" alt="{{.Name}}" onerror="this.onerror=null;this.src='/Static/img/error.png';">
+                    </a>
                     <img src="{{.RoleIcon}}" alt="Role Icon" class="role-icon">
                     <h3>{{.Name}}</h3>
                     <p>{{.Description}}</p>

@@ -15,6 +15,7 @@ func main() {
     http.HandleFunc("/home", homeHandler)
     http.HandleFunc("/auth", authHandler)
     http.HandleFunc("/login", loginHandler)
+    http.HandleFunc("/character/", controllers.HandleCharacterDetails) // Nouvelle route pour les détails du personnage
 
     // Servir les fichiers statiques correctement
     fs := http.FileServer(http.Dir("./Static"))
