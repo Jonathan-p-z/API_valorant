@@ -1,21 +1,26 @@
-<!DOCTYPE search>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recherche</title>
-    <link rel="stylesheet" href="/static/css/style.css">
+    <title>Résultats de recherche</title>
+    <link rel="stylesheet" href="/static/css/search.css">
 </head>
 <body>
-    <h1>Résultats de la recherche</h1>
-    <div class="results">
-        {{range .}}
-        <div class="result-item">
-            <h2>{{.Name}}</h2>
-            <img src="{{.Image}}" alt="{{.Name}}">
-            <p>{{.Description}}</p>
+    {{template "header.html" .}}
+    <section class="search-results">
+        <h2>Résultats de recherche</h2>
+        <div class="results-grid">
+            {{range .}}
+            <div class="result-item">
+                <img src="{{.Image}}" alt="{{.Name}}">
+                <h3>{{.Name}}</h3>
+                <p>Similarité : {{.Percentage}}%</p>
+                <a href="{{.Link}}" class="btn">Voir les détails</a>
+            </div>
+            {{end}}
         </div>
-        {{end}}
-    </div>
+    </section>
+    {{template "footer.html" .}}
 </body>
 </html>

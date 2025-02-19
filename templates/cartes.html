@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{.Title}}</title>
+    <link rel="stylesheet" href="/static/css/cartes.css">
+    <link rel="stylesheet" href="/static/css/header.css">
+</head>
+<body>
+    {{template "header.html" .}}
+    <section class="maps">
+        <h2>Cartes de Valorant</h2>
+        <div class="maps-grid">
+            {{range .Maps}}
+            <div class="map-item">
+                <img src="{{.Image}}" alt="{{.Name}}" class="map-image">
+                <h3>{{.Name}}</h3>
+                <p>{{.Description}}</p>
+            </div>
+            {{end}}
+        </div>
+    </section>
+    <footer>
+        <p>&copy; 2023 Valorant. Tous droits réservés.</p>
+    </footer>
+</body>
+</html>

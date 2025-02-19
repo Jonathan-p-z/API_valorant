@@ -1,58 +1,317 @@
+/* styles.css */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #0f1923;
-    color: white;
-}
-
-header {
-    background-color: #ff4655;
-    padding: 20px;
+    background-color: #0e1821;
+    color: #fff;
     text-align: center;
-}
-
-header h1 {
-    margin: 0;
-}
-
-main {
-    padding: 20px;
-}
-
-.agents-container {
     display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
+    flex-direction: column;
 }
-
-.agent-card {
-    background-color: #1f2937;
-    border: 1px solid #394b59;
-    border-radius: 10px;
-    padding: 15px;
-    text-align: center;
-    width: 200px;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.agent-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-}
-
-.agent-card img {
+header {
+    position: fixed;
+    top: 0;
     width: 100%;
+    background-color: #1a2634;
+    z-index: 1000;
+}
+.logo img {
+    height: 40px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.cta .btn {
+    background-color: #ff4655;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #1a2634;
+    width: 100vw;
+    height: 30vh;
+    box-sizing: border-box;
+    padding: 20px;
+    align-items: center;
+}
+
+.hero-content {
+    max-width: 50vw;
+    text-align: center; /* Centre le texte à l'intérieur */
+}
+
+.hero-background {
+    display: none; /* Masque l'élément de fond si nécessaire */
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.hero-content .btn-hero {
+    background-color: #ff4655;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.hero-content .btn-hero:hover {
+    background-color: #e03e4e;
+}
+
+.hero-image img {
+    max-width: 100%;
+    height: auto;
+}
+
+.news {
+    padding: 50px;
+    text-align: center;
+}
+
+.news h2 {
+    font-size: 2rem;
+    margin-bottom: 40px;
+}
+
+.news-grid {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+.news-item {
+    background-color: #1f2e3d;
+    padding: 20px;
     border-radius: 10px;
+    max-width: 2000px;
+    transition: transform 0.3s ease;
+    text-align: center;
 }
 
-.agent-card h3 {
-    margin: 10px 0 5px;
-    font-size: 1.2em;
+.news-item:hover {
+    transform: translateY(-10px);
 }
 
-.agent-card p {
-    font-size: 0.9em;
-    color: #d1d5db;
+.news-item img {
+    max-width: 100%;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+.news-item h3 {
+    font-size: 1.5rem;
+    margin: 10px 0;
+}
+
+.news-item p {
+    font-size: 1rem;
+}
+
+.news-item .btn-news {
+    display: inline-block;
+    margin-top: 10px;
+    background-color: #8165d9;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.news-item .btn-news:hover {
+    background-color: #e03e4e;
+}
+
+.news-agent h1, .news-cartes h1, .news-item-h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.news-agent, .news-cartes {
+    padding: 50px;
+    text-align: center;
+}
+
+.news-agent h2, .news-cartes h2 {
+    font-size: 2rem;
+    margin-bottom: 40px;
+}
+
+.news-agent, .news-cartes {
+    font-size: 2rem;
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.news-agent-item, .news-cartes-item {
+    background-color: #1f2e3d;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 2000px;
+    transition: transform 0.3s ease;
+    text-align: center;
+}
+
+.news-agent-item:hover, .news-cartes-item:hover {
+    transform: translateY(-10px);
+}
+
+.news-agent-item h3, .news-cartes-item h3 {
+    font-size: 1.5rem;
+    margin: 10px 0;
+}
+
+.news-agent-item p, .news-cartes-item p {
+    font-size: 1rem;
+}
+
+.agents, .maps {
+    padding: 50px;
+    text-align: center;
+}
+
+.agents h2, .maps h2 {
+    font-size: 2rem;
+    margin-bottom: 40px;
+}
+
+.agents-grid, .maps-grid {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.agent-item, .map-item {
+    background-color: #1f2e3d;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 300px;
+    transition: transform 0.3s ease;
+    text-align: center;
+}
+
+.agent-item:hover, .map-item:hover {
+    transform: translateY(-10px);
+}
+
+.agent-item h3, .map-item h3 {
+    font-size: 1.5rem;
+    margin: 10px 0;
+}
+
+.agent-item p, .map-item p {
+    font-size: 1rem;
+}
+
+footer {
+    background-color: #1f2e3d;
+    text-align: center;
+    padding: 20px;
+    margin-top: 50px;
+}
+
+.agent-icon, .map-image, .fanart-image, .img-masterbangkok, .img-agent, .img-map {
+    max-width: 100%;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 10px;
+    background-color: #ff4655;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.btn:hover {
+    background-color: #e03e4e;
+}
+
+.news-agent .btn-agent {
+    display: inline-block;
+    margin-top: 10px;
+    background-color: #8165d9;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.news-agent .btn-agent:hover {
+    background-color: #e03e4e;
+}
+
+.news-cartes .btn-cartes {
+    display: inline-block;
+    margin-top: 10px;
+    background-color: #8165d9;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.news-cartes .btn-cartes:hover {
+    background-color: #e03e4e;
+}
+
+/* Ajout de l'animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Appliquer l'animation aux éléments */
+.news-item,
+.news-agent-item,
+.news-cartes-item,
+.agent-item,
+.map-item {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.lienGithub {
+    text-decoration: none;
+    color: #fff;
+}
+
+.lienGithub:hover {
+    color: goldenrod;
 }

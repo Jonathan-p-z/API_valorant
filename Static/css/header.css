@@ -16,7 +16,7 @@ header {
 .header-image {
     width: 100px;
     height: auto;
-    border-radius: 50%;
+    border-radius: 20px;
     animation: float 3s ease-in-out infinite;
 }
 
