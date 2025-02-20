@@ -11,8 +11,9 @@ func main() {
 	http.HandleFunc("/characters/search", controllers.HandleSearch)
 	http.HandleFunc("/characters/filter", controllers.HandleFilteredCharacters)
 	http.HandleFunc("/weapons", controllers.HandleWeapons)
-	http.HandleFunc("/maps", controllers.HandleMaps)     // New route for maps
-	http.HandleFunc("/search", controllers.HandleSearch) // New route for search
+	http.HandleFunc("/maps", controllers.HandleMaps)               // New route for maps
+	http.HandleFunc("/maps/details", controllers.HandleMapDetails) // New route for map details
+	http.HandleFunc("/search", controllers.HandleSearch)           // New route for search
 
 	http.HandleFunc("/home", homeHandler)
 	http.HandleFunc("/auth", authHandler)

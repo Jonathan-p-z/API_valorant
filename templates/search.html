@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Résultats de recherche</title>
+    <title>Résultats de la recherche</title>
     <link rel="stylesheet" href="/static/css/search.css">
+    <link rel="stylesheet" href="/static/css/header.css">
 </head>
 <body>
     {{template "header.html" .}}
     <section class="search-results">
-        <h2>Résultats de recherche</h2>
+        <h2>Résultats de la recherche</h2>
         <div class="results-grid">
             {{range .}}
             <div class="result-item">
-                <img src="{{.Image}}" alt="{{.Name}}">
+                <img src="{{.Image}}" alt="{{.Name}}" class="result-image">
                 <h3>{{.Name}}</h3>
-                <p>Similarité : {{.Percentage}}%</p>
-                <a href="{{.Link}}" class="btn">Voir les détails</a>
+                <p>{{.Description}}</p>
+                <a href="{{.Link}}" class="result-link">Voir plus</a>
             </div>
             {{end}}
         </div>
     </section>
-    {{template "footer.html" .}}
 </body>
 </html>

@@ -41,7 +41,7 @@ main {
 .agent-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-    background-color: #ff4655; /* Changement de couleur en rouge */
+    background-color: #ff4655;
 }
 
 .agent-card img {
@@ -65,4 +65,25 @@ main {
 .agent-card p {
     font-size: 0.9em;
     color: #d1d5db;
+}
+
+.pagination {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.pagination .btn {
+    display: inline-block;
+    margin: 0 10px;
+    background-color: #ff4655;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.pagination .btn:hover {
+    background-color: #e03e4e;
+    transform: scale(1.1);
 }

@@ -2,9 +2,9 @@ package api
 
 // Agent représente un agent dans Valorant
 type Agent struct {
-    Name        string `json:"name"`
+    Name        string `json:"displayName"`
+    Image       string `json:"fullPortrait"`
     Description string `json:"description"`
-    Image       string `json:"image"`
 }
 
 // Response représente la réponse de l'API contenant une liste d'agents

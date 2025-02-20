@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"strings"
 )
 
 type Map struct {
@@ -69,5 +70,36 @@ func HandleMaps(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Println("Error executing template:", err)
 		http.Error(w, "Failed to render page", http.StatusInternalServerError)
+	}
+}
+
+func HandleMapDetails(w http.ResponseWriter, r *http.Request) {
+	name := r.URL.Query().Get("id")
+	var apiResponse APIResponse
+	err := fetchAPI("https://valorant-api.com/v1/maps", &apiResponse)
+	if err != nil {
+		http.Error(w, "Error fetching maps: "+err.Error(), http.StatusInternalServerError)
+		return
+	}
+	maps := apiResponse.Data
+	var mapDetail Map
+	for _, m := range maps {
+		if strings.EqualFold(m.Name, name) {
+			mapDetail = m
+			break
+		}
+	}
+	if mapDetail.Name == "" {
+		http.NotFound(w, r)
+		return
+	}
+	tmpl, err := template.ParseFiles("templates/map_details.html", "templates/header.html")
+	if err != nil {
+		http.Error(w, "Error loading template: "+err.Error(), http.StatusInternalServerError)
+		return
+	}
+	err = tmpl.Execute(w, mapDetail)
+	if err != nil {
+		http.Error(w, "Error executing template: "+err.Error(), http.StatusInternalServerError)
 	}
 }

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Détails de la carte</title>
+    <link rel="stylesheet" href="/static/css/map_details.css">
+    <link rel="stylesheet" href="/static/css/header.css">
+</head>
+<body>
+    {{template "header.html" .}}
+    <main>
+        <section class="map-details">
+            <h2>{{.Name}}</h2>
+            <img src="{{.Image}}" alt="{{.Name}}" class="map-image">
+            <p>{{.Description}}</p>
+        </section>
+    </main>
+</body>
+</html>

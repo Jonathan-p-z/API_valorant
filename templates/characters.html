@@ -13,7 +13,7 @@
         <section id="agents">
             <h2>Nos Agents</h2>
             <div class="agents-container">
-                {{range .Agents}}
+                {{range .Characters}}
                 <div class="agent-card">
                     <a href="/character/{{.Name}}">
                         <img src="{{.Image}}" alt="{{.Name}}" onerror="this.onerror=null;this.src='/Static/img/error.png';">
@@ -22,6 +22,14 @@
                     <h3>{{.Name}}</h3>
                     <p>{{.Description}}</p>
                 </div>
+                {{end}}
+            </div>
+            <div class="pagination">
+                {{if gt .Page 1}}
+                <a href="/characters?page={{sub .Page 1}}" class="btn">Précédent</a>
+                {{end}}
+                {{if lt .Page .TotalPages}}
+                <a href="/characters?page={{add .Page 1}}" class="btn">Suivant</a>
                 {{end}}
             </div>
         </section>

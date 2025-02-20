@@ -1,25 +1,21 @@
 package api
 
 import (
-	"encoding/json"
-	"fmt"
+    "encoding/json"
+    "net/http"
 )
 
-// FetchCharacters récupère les agents depuis l'API
 func FetchCharacters() ([]Agent, error) {
-	apiURL := "https://valorant-api.com/v1/agents"
-	body, err := FetchData(apiURL)
-	if err != nil {
-		return nil, err
-	}
+    resp, err := http.Get("https://valorant-api.com/v1/agents")
+    if err != nil {
+        return nil, err
+    }
+    defer resp.Body.Close()
 
-	var data struct {
-		Data []Agent `json:"data"`
-	}
-	err = json.Unmarshal(body, &data)
-	if err != nil {
-		return nil, fmt.Errorf("Erreur parsing JSON : %v", err)
-	}
+    var result Response
+    if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
+        return nil, err
+    }
 
-	return data.Data, nil
+    return result.Agents, nil
 }

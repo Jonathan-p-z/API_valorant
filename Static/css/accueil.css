@@ -8,6 +8,7 @@ body {
     text-align: center;
     display: flex;
     flex-direction: column;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 header {
     position: fixed;

@@ -7,24 +7,15 @@ body {
     text-align: center;
 }
 
-.search-results {
-    padding: 50px;
-    text-align: center;
-}
-
-.search-results h2 {
-    font-size: 2rem;
-    margin-bottom: 40px;
-}
-
-.results-grid {
+.maps-container {
     display: flex;
-    justify-content: center;
-    gap: 20px;
     flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
 }
 
-.result-item {
+.map-card {
     background-color: #1f2e3d;
     padding: 20px;
     border-radius: 10px;
@@ -33,35 +24,21 @@ body {
     text-align: center;
 }
 
-.result-item:hover {
+.map-card:hover {
     transform: translateY(-10px);
 }
 
-.result-item img {
+.map-card img {
     max-width: 100%;
     border-radius: 10px;
     margin-top: 10px;
 }
 
-.result-item h3 {
+.map-card h3 {
     font-size: 1.5rem;
     margin: 10px 0;
 }
 
-.result-item p {
+.map-card p {
     font-size: 1rem;
-}
-
-.result-link {
-    display: inline-block;
-    margin-top: 10px;
-    background-color: #ff4655;
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
-}
-
-.result-link:hover {
-    background-color: #e03e4e;
 }
