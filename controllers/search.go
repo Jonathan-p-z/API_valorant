@@ -5,8 +5,11 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+	"os"
 	"sort"
+	"strconv"
 	"strings"
+	"time"
 )
 
 type SearchResult struct {
@@ -17,36 +20,82 @@ type SearchResult struct {
 	Percentage  float64
 }
 
-func similarityPercentage(str1, str2 string) float64 {
-	lenStr1 := len(str1)
-	lenStr2 := len(str2)
-	if lenStr1 == 0 {
-		return float64(lenStr2)
-	}
-	if lenStr2 == 0 {
-		return float64(lenStr1)
-	}
-	matrix := make([][]int, lenStr1+1)
-	for i := range matrix {
-		matrix[i] = make([]int, lenStr2+1)
-	}
-	for i := 0; i <= lenStr1; i++ {
-		matrix[i][0] = i
-	}
-	for j := 0; j <= lenStr2; j++ {
-		matrix[0][j] = j
-	}
-	for i := 1; i <= lenStr1; i++ {
-		for j := 1; j <= lenStr2; j++ {
-			cost := 0
-			if str1[i-1] != str2[j-1] {
-				cost = 1
-			}
-			matrix[i][j] = min(matrix[i-1][j]+1, min(matrix[i][j-1]+1, matrix[i-1][j-1]+cost))
+type Config struct {
+	PercentageAcceptable float64
+	CacheDuration        time.Duration
+	MinimumPercentage    float64
+}
+
+var (
+	config        Config
+	cachedAgents  []api.Character
+	cachedWeapons []api.Weapon
+	cachedMaps    []api.Map
+	lastFetchTime time.Time
+)
+
+func init() {
+	config.PercentageAcceptable = getEnvAsFloat("PERCENTAGE_ACCEPTABLE", 60.0)
+	config.CacheDuration = getEnvAsDuration("CACHE_DURATION", 5*time.Minute)
+}
+
+func getEnvAsFloat(key string, defaultValue float64) float64 {
+	if value, exists := os.LookupEnv(key); exists {
+		if floatValue, err := strconv.ParseFloat(value, 64); err == nil {
+			return floatValue
 		}
 	}
-	distance := matrix[lenStr1][lenStr2]
-	maxLen := max(lenStr1, lenStr2)
+	return defaultValue
+}
+
+func getEnvAsDuration(key string, defaultValue time.Duration) time.Duration {
+	if value, exists := os.LookupEnv(key); exists {
+		if durationValue, err := time.ParseDuration(value); err == nil {
+			return durationValue
+		}
+	}
+	return defaultValue
+}
+
+func levenshteinDistance(s1, s2 string) int {
+	s1 = strings.ToLower(s1)
+	s2 = strings.ToLower(s2)
+	lenS1 := len(s1)
+	lenS2 := len(s2)
+
+	if lenS1 == 0 {
+		return lenS2
+	}
+	if lenS2 == 0 {
+		return lenS1
+	}
+
+	prevRow := make([]int, lenS2+1)
+	for j := 0; j <= lenS2; j++ {
+		prevRow[j] = j
+	}
+
+	for i := 1; i <= lenS1; i++ {
+		currentRow := make([]int, lenS2+1)
+		currentRow[0] = i
+
+		for j := 1; j <= lenS2; j++ {
+			cost := 0
+			if s1[i-1] != s2[j-1] {
+				cost = 1
+			}
+			currentRow[j] = min(currentRow[j-1]+1, min(prevRow[j]+1, prevRow[j-1]+cost))
+		}
+
+		prevRow = currentRow
+	}
+
+	return prevRow[lenS2]
+}
+
+func similarityPercentage(s1, s2 string) float64 {
+	distance := levenshteinDistance(s1, s2)
+	maxLen := max(len(s1), len(s2))
 	return (1.0 - float64(distance)/float64(maxLen)) * 100
 }
 
@@ -65,94 +114,98 @@ func max(a, b int) int {
 }
 
 func HandleSearch(w http.ResponseWriter, r *http.Request) {
+	startTime := time.Now()
 	log.Println("HandleSearch called")
-	query := strings.ToLower(r.URL.Query().Get("search"))
+
+	query := strings.TrimSpace(strings.ToLower(r.URL.Query().Get("search")))
+	if query == "" {
+		http.Error(w, "Le paramètre 'search' est requis.", http.StatusBadRequest)
+		return
+	}
 	log.Printf("Search query: %s", query)
+	if time.Since(lastFetchTime) > config.CacheDuration {
+		var errAgents, errWeapons, errMaps error
+		cachedAgents, errAgents = api.FetchCharacters()
+		cachedWeapons, errWeapons = api.FetchWeapons()
+		cachedMaps, errMaps = api.FetchMaps()
 
-	agents, err := api.FetchCharacters()
-	if err != nil {
-		log.Printf("Error fetching characters: %v", err)
-		http.Error(w, "Erreur lors de la récupération des agents.", http.StatusInternalServerError)
-		return
+		if errAgents != nil || errWeapons != nil || errMaps != nil {
+			log.Printf("Erreur lors de la récupération des données: agents: %v, weapons: %v, maps: %v", errAgents, errWeapons, errMaps)
+			http.Error(w, "Erreur lors de la récupération des données.", http.StatusInternalServerError)
+			return
+		}
+		lastFetchTime = time.Now()
 	}
 
-	weapons, err := api.FetchWeapons()
-	if err != nil {
-		log.Printf("Error fetching weapons: %v", err)
-		http.Error(w, "Erreur lors de la récupération des armes.", http.StatusInternalServerError)
-		return
-	}
-
-	maps, err := api.FetchMaps()
-	if err != nil {
-		log.Printf("Error fetching maps: %v", err)
-		http.Error(w, "Erreur lors de la récupération des cartes.", http.StatusInternalServerError)
-		return
-	}
-
-	searchResults := searchAll(query, agents, weapons, maps)
+	searchResults := searchAll(query, cachedAgents, cachedWeapons, cachedMaps)
 	log.Printf("Search results: %v", searchResults)
 
 	tmpl, err := template.ParseFiles("templates/search.html", "templates/header.html", "templates/footer.html")
 	if err != nil {
-		log.Printf("Error loading template: %v", err)
+		log.Printf("Erreur lors du chargement du template: %v", err)
 		http.Error(w, "Erreur lors du chargement du template.", http.StatusInternalServerError)
 		return
 	}
-	err = tmpl.Execute(w, searchResults)
-	if err != nil {
-		log.Printf("Error executing template: %v", err)
+
+	if err := tmpl.Execute(w, searchResults); err != nil {
+		log.Printf("Erreur lors de l'exécution du template: %v", err)
 		http.Error(w, "Erreur lors de l'exécution du template.", http.StatusInternalServerError)
 	}
+
+	log.Printf("Temps d'exécution de HandleSearch: %v", time.Since(startTime))
 }
 
 func searchAll(query string, agents []api.Character, weapons []api.Weapon, maps []api.Map) []SearchResult {
-	var PercentageAcceptable float64 = 60.0
 	var searchResults []SearchResult
 
-	for _, agent := range agents {
-		percentage := similarityPercentage(query, agent.DisplayName)
-		if percentage > PercentageAcceptable {
-			searchResults = append(searchResults, SearchResult{
-				Name:        agent.DisplayName,
-				Image:       agent.DisplayIcon,
-				Description: agent.Description,
-				Link:        "/characters/details?id=" + agent.UUID,
-				Percentage:  percentage,
-			})
+	addResult := func(name, image, description, link string, percentage float64) {
+		searchResults = append(searchResults, SearchResult{
+			Name:        name,
+			Image:       image,
+			Description: description,
+			Link:        link,
+			Percentage:  percentage,
+		})
+	}
+	switch query {
+	case "agents", "characters":
+		for _, agent := range agents {
+			addResult(agent.DisplayName, agent.DisplayIcon, agent.Description, "/character/"+agent.DisplayName, 100.0)
+		}
+	case "weapons":
+		for _, weapon := range weapons {
+			addResult(weapon.DisplayName, weapon.DisplayIcon, weapon.Description, "/weapons", 100.0)
+		}
+	case "maps":
+		for _, m := range maps {
+			addResult(m.DisplayName, m.Splash, m.Description, "/maps/details?id="+m.UUID, 100.0)
+		}
+	default:
+		for _, agent := range agents {
+			if percentage := similarityPercentage(query, agent.DisplayName); percentage > 30.0 {
+				addResult(agent.DisplayName, agent.DisplayIcon, agent.Description, "/character/"+agent.DisplayName, percentage)
+			}
+		}
+		for _, weapon := range weapons {
+			if percentage := similarityPercentage(query, weapon.DisplayName); percentage > 30.0 {
+				addResult(weapon.DisplayName, weapon.DisplayIcon, weapon.Description, "/weapons", percentage)
+			}
+		}
+		for _, m := range maps {
+			if percentage := similarityPercentage(query, m.DisplayName); percentage > 30.0 {
+				addResult(m.DisplayName, m.Splash, m.Description, "/maps/details?id="+m.UUID, percentage)
+			}
 		}
 	}
-
-	for _, weapon := range weapons {
-		percentage := similarityPercentage(query, weapon.DisplayName)
-		if percentage > PercentageAcceptable {
-			searchResults = append(searchResults, SearchResult{
-				Name:        weapon.DisplayName,
-				Image:       weapon.DisplayIcon,
-				Description: weapon.Description,
-				Link:        "/weapons/details?id=" + weapon.UUID,
-				Percentage:  percentage,
-			})
-		}
-	}
-
-	for _, m := range maps {
-		percentage := similarityPercentage(query, m.DisplayName)
-		if percentage > PercentageAcceptable {
-			searchResults = append(searchResults, SearchResult{
-				Name:        m.DisplayName,
-				Image:       m.Splash,
-				Description: m.Description,
-				Link:        "/maps/details?id=" + m.UUID,
-				Percentage:  percentage,
-			})
-		}
-	}
-
-	// Sort results by similarity percentage in descending order
 	sort.Slice(searchResults, func(i, j int) bool {
 		return searchResults[i].Percentage > searchResults[j].Percentage
 	})
 
 	return searchResults
+}
+
+func init() {
+	config.PercentageAcceptable = getEnvAsFloat("PERCENTAGE_ACCEPTABLE", 60.0)
+	config.CacheDuration = getEnvAsDuration("CACHE_DURATION", 5*time.Minute)
+	config.MinimumPercentage = getEnvAsFloat("MINIMUM_PERCENTAGE", 30.0)
 }

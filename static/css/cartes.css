@@ -25,12 +25,13 @@ body {
 }
 
 .map-item {
-    position: relative;
-    background-color: #1f2e3d;
-    padding: 20px;
+    background-color: #1f2937;
+    border: 1px solid #394b59;
     border-radius: 10px;
-    max-width: 300px;
+    padding: 15px;
     text-align: center;
+    width: 300px;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .map-item img {

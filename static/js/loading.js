@@ -59,7 +59,16 @@ window.addEventListener("load", function() {
     });
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-    const progressBar = document.querySelector('.progress');
-    progressBar.style.width = '100%';
+document.addEventListener("DOMContentLoaded", function() {
+    var progressBar = document.querySelector(".progress");
+    var width = 0;
+    var interval = setInterval(function() {
+        if (width >= 100) {
+            clearInterval(interval);
+            window.location.href = "/home"; // Redirect to home after loading
+        } else {
+            width += 1;
+            progressBar.style.width = width + "%";
+        }
+    }, 50); // Adjust the interval time to control the speed of the progress bar
 });

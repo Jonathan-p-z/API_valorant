@@ -3,53 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{.Title}}</title>
+    <title>Accueil - Valorant</title>
     <link rel="stylesheet" href="/static/css/accueil.css">
     <link rel="stylesheet" href="/static/css/header.css">
     <link rel="stylesheet" href="/static/css/footer.css">
 </head>
 <body>
     {{template "header.html" .}}
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Bienvenue dans l'univers de Valorant</h1>
-            <p>Rejoignez la bataille et devenez un agent légendaire.</p>
-            <a href="https://playvalorant.com/fr-fr/platform-selection/" class="btn-hero">Entrez dans la légende</a>
-        </div>
-        <div class="hero-background"></div>
-    </section>
-    <section class="news">
-        <div class="news-item">
-            <h1 class="news-item-h1">Dernières Actualités</h1>
-            <img class="img-masterbangkok" src="/static/img/MastersBangkok.avif" alt="Masters Bangkok">
-            <h3>Regardez pour gagner : Masters Bangkok</h3>
-            <h3>Suivez les matchs en direct pour gagner des drops exclusifs !</h3>
-            <p>Suivez les matchs des Masters Bangkok en direct pour remporter des drops exclusifs, dont un titre et un graffiti !</p>
-            Si cela vous intéresse je vous invite a cliquer ici : <a href="https://valorantesports.com/fr-FR/news/watch-and-earn-masters-bangkok" class="btn-news">Go !</a>
-        </div>
-    </section>
-    <section class="news-agent">
-        <div class="news-agent-item">
-            <h1 class="news-item-h1">Agent</h1>
-            <img class="img-agent" src="/static/img/013dc5d8874cce55d4aa7b678049bcfaa52f127b-1920x1080.jpg" alt="Tejo nouvelle agent">
-            <p>Agent rajoutés le 8 janvier 2025 lors du nouvelle premier acte de l'épisode 10.</p>
-            <p>Cet Agent colombien devient ainsi le septième Initiateur à rejoindre la liste, après Breach, Fade, Gekko, KAY/O, Skye et Sova.</p>
-            <p>pour en savoir plus sur l'agent Tejo de valorant de vous invite a allez ici : <a href="/templates/characters_details.html" class="btn-agent">Go !</a></p>
-        </div>
-    </section>
-    <section class="news-cartes">
-        
-        <div class="news-cartes-item">
-            <h1 class="news-item-h1">Cartes</h1>
-            <img class="img-map" src="/static/img/abyss.webp" alt="new maps abyss">
-            <h3>La nouvelle cartes qui se nomme abyss qui est sortie depuis le 11 juin 2024.</h3>
-            <h3>La carte Abyss est la dernière venue dans l’univers de Valorant, et elle apporte avec elle une multitude de nouvelles stratégies et de possibilités.</h3>
-            <p>pour en savoir plus sur les maps de valorant de vous invite a allez ici : <a href="/templates/cartes/abyss" class="btn-cartes">Go !</a></p>
-        </div>
-    </section>
-    <footer>
-        <a href="https://github.com/Jonathan-p-z" class="lienGithub">Jonathan Perez</a>
-    </footer>
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Bienvenue dans l'univers de Valorant</h1>
+                <p>Rejoignez la bataille et devenez un agent légendaire.</p>
+                <a href="https://playvalorant.com/fr-fr/platform-selection/" class="btn-hero">Entrez dans la légende</a>
+            </div>
+            <div class="hero-background"></div>
+        </section>
+        <section class="news">
+            <div class="news-item">
+                <h1 class="news-item-h1">Dernières Actualités</h1>
+                <img class="img-masterbangkok" src="/static/img/MastersBangkok.avif" alt="Masters Bangkok">
+                <h3>Regardez pour gagner : Masters Bangkok</h3>
+                <h3>Suivez les matchs en direct pour gagner des drops exclusifs !</h3>
+                <p>Suivez les matchs des Masters Bangkok en direct pour remporter des drops exclusifs, dont un titre et un graffiti !</p>
+                Si cela vous intéresse je vous invite a cliquer ici : <a href="https://valorantesports.com/fr-FR/news/watch-and-earn-masters-bangkok" class="btn-news">Go !</a>
+            </div>
+        </section>
+        <section class="news-agent">
+            <div class="news-agent-item">
+                <h1 class="news-item-h1">Agent</h1>
+                <img class="img-agent" src="/static/img/013dc5d8874cce55d4aa7b678049bcfaa52f127b-1920x1080.jpg" alt="Tejo nouvelle agent">
+                <p>Agent rajoutés le 8 janvier 2025 lors du nouvelle premier acte de l'épisode 10.</p>
+                <p>Cet Agent colombien devient ainsi le septième Initiateur à rejoindre la liste, après Breach, Fade, Gekko, KAY/O, Skye et Sova.</p>
+                <p>Pour en savoir plus sur l'agent Tejo de Valorant, je vous invite à aller ici : <a href="/character/Tejo" class="btn-agent">Go !</a></p>
+            </div>
+        </section>
+        <section class="news-cartes">
+            <div class="news-cartes-item">
+                <h1 class="news-item-h1">Cartes</h1>
+                <img class="img-map" src="/static/img/abyss.webp" alt="new maps abyss">
+                <h3>La nouvelle carte qui se nomme Abyss est sortie depuis le 11 juin 2024.</h3>
+                <h3>La carte Abyss est la dernière venue dans l’univers de Valorant, et elle apporte avec elle une multitude de nouvelles stratégies et de possibilités.</h3>
+                <p>Pour en savoir plus sur les cartes de Valorant, je vous invite à aller ici : <a href="/maps" class="btn-cartes">Go !</a></p>
+            </div>
+        </section>
+    </main>
+    {{template "footer.html" .}}
     <script src="/static/js/accueil.js"></script>
 </body>
 </html>

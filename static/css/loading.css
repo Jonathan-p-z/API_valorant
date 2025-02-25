@@ -30,5 +30,5 @@ body {
     width: 0;
     background-color: #ff4655;
     border-radius: 10px;
-    transition: width 3s;
+    transition: width 0.5s;
 }

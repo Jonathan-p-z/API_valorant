@@ -6,10 +6,11 @@
     <title>Recherche</title>
     <link rel="stylesheet" href="/static/css/search.css">
     <link rel="stylesheet" href="/static/css/header.css">
+    <link rel="stylesheet" href="/static/css/footer.css">
 </head>
 <body>
     {{template "header.html" .}}
-    <main>
+    <main style="padding-bottom: 60px;"> <!-- Ensure enough padding at the bottom -->
         <section class="search-section">
             <h2>Recherche</h2>
             <form action="/search" method="get">

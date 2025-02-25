@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error {{.Status}}</title>
+    <link rel="stylesheet" href="/static/css/error.css">
+</head>
+<body>
+    <div class="error-container">
+        <h1>Error {{.Status}}</h1>
+        <p>{{if eq .Status 400}}The request is malformed. Please check your input and try again.{{end}}
+           {{if eq .Status 401}}Authentication is required. Please log in and try again.{{end}}
+           {{if eq .Status 403}}Sorry, you don't have permission to access this page.{{end}}
+           {{if eq .Status 404}}Sorry, the page you are looking for does not exist.{{end}}
+           {{if eq .Status 405}}The HTTP method is not allowed for this resource.{{end}}
+           {{if eq .Status 408}}The server took too long to respond. Please try again later.{{end}}
+           {{if eq .Status 429}}You have sent too many requests in a short period. Please try again later.{{end}}
+           {{if eq .Status 500}}An unexpected error occurred on the server. Please try again later.{{end}}
+           {{if eq .Status 502}}The server received an invalid response from another server. Please try again later.{{end}}
+           {{if eq .Status 503}}Sorry, the service is currently unavailable. Please try again later.{{end}}
+           {{if eq .Status 504}}A server took too long to respond. Please try again later.{{end}}</p>
+        <p><strong></strong> {{if eq .Status 400}}The server could not understand the request due to invalid syntax.{{end}}
+           {{if eq .Status 401}}The request requires user authentication. Please log in to access this resource.{{end}}
+           {{if eq .Status 403}}The server understood the request, but refuses to authorize it.{{end}}
+           {{if eq .Status 404}}The server can not find the requested resource. The URL may be incorrect or the page may have been moved.{{end}}
+           {{if eq .Status 405}}The request method is known by the server but is not supported by the target resource.{{end}}
+           {{if eq .Status 408}}The server timed out waiting for the request. Please try again later.{{end}}
+           {{if eq .Status 429}}The user has sent too many requests in a given amount of time ("rate limiting").{{end}}
+           {{if eq .Status 500}}The server encountered an unexpected condition that prevented it from fulfilling the request.{{end}}
+           {{if eq .Status 502}}The server, while acting as a gateway or proxy, received an invalid response from the upstream server.{{end}}
+           {{if eq .Status 503}}The server is not ready to handle the request. Common causes are a server that is down for maintenance or that is overloaded.{{end}}
+           {{if eq .Status 504}}The server, while acting as a gateway or proxy, did not receive a timely response from the upstream server.{{end}}</p>
+        <a href="/home" class="btn">Go to Home</a>
+    </div>
+</body>
+</html>

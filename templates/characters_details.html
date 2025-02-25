@@ -6,6 +6,7 @@
     <title>{{.Name}} - Valorant</title>
     <link rel="stylesheet" href="/static/css/character_details.css">
     <link rel="stylesheet" href="/static/css/header.css">
+    <link rel="stylesheet" href="/static/css/footer.css">
 </head>
 <body>
     {{template "header.html" .}}
@@ -44,9 +45,7 @@
             </video>
         </section>
     </main>
-    <footer>
-        <a href="https://github.com/Jonathan-p-z" class="lienGithub">Jonathan Perez</a>
-    </footer>
+    {{template "footer.html" .}}
     <script src="/static/js/characters_details.js"></script>
 </body>
 </html>

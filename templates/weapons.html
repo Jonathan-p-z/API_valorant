@@ -6,12 +6,12 @@
     <title>Armes Valorant</title>
     <link rel="stylesheet" href="/static/css/weapons.css">
     <link rel="stylesheet" href="/static/css/header.css">
+    <link rel="stylesheet" href="/static/css/footer.css">
 </head>
 <body>
     {{template "header.html" .}}
     <main>
         <section id="weapons">
-            <h1>Armes Valorant</h1>
             <div class="weapons-category">
                 <h2>Armes de poing</h2>
                 <div class="weapons-container">
@@ -142,8 +142,6 @@
             </div>
         </section>
     </main>
-    <footer>
-        <a href="https://github.com/Jonathan-p-z" class="lienGithub">Jonathan Perez</a>
-    </footer>
+    {{template "footer.html" .}}
 </body>
 </html>
