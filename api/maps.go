@@ -5,22 +5,22 @@ import (
 	"fmt"
 )
 
-type Weapon struct {
+type Map struct {
 	UUID        string `json:"uuid"`
 	DisplayName string `json:"displayName"`
 	Description string `json:"description"`
-	DisplayIcon string `json:"displayIcon"`
+	Splash      string `json:"splash"`
 }
 
-func FetchWeapons() ([]Weapon, error) {
-	apiURL := "https://valorant-api.com/v1/weapons"
+func FetchMaps() ([]Map, error) {
+	apiURL := "https://valorant-api.com/v1/maps"
 	body, err := FetchData(apiURL)
 	if err != nil {
 		return nil, err
 	}
 
 	var data struct {
-		Data []Weapon `json:"data"`
+		Data []Map `json:"data"`
 	}
 	err = json.Unmarshal(body, &data)
 	if err != nil {

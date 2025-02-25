@@ -9,22 +9,21 @@
 </head>
 <body>
     {{template "header.html" .}}
-    <section class="maps">
-        <h2>Cartes de Valorant</h2>
-        <div class="maps-grid">
-            {{range .Maps}}
-            <div class="map-item">
-                <a href="/maps/details?id={{.Name}}">
-                    <img src="{{.Image}}" alt="{{.Name}}" class="map-image">
-                </a>
-                <h3>{{.Name}}</h3>
-                <p>{{.Description}}</p>
+    <main>
+        <section class="maps">
+            <h2>{{.Title}}</h2>
+            <div class="maps-list">
+                {{range .Maps}}
+                <div class="map-item">
+                    <a href="/maps/details?id={{.ID}}">
+                        <img src="{{.Image}}" alt="{{.Name}}" class="map-image">
+                        <h3>{{.Name}}</h3>
+                    </a>
+                </div>
+                {{end}}
             </div>
-            {{end}}
-        </div>
-    </section>
-    <footer>
-        <p>&copy; 2023 Valorant. Tous droits réservés.</p>
-    </footer>
+        </section>
+    </main>
+    {{template "footer.html" .}}
 </body>
 </html>

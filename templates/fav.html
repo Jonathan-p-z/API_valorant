@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favoris</title>
+    <link rel="stylesheet" href="/static/css/favorites.css">
+</head>
+<body>
+    {{template "header.html" .}}
+    <main>
+        <section class="favorites">
+            <h2>Mes Favoris</h2>
+            <div id="favorites-list" class="favorites-list">
+                {{range .}}
+                <div id="favorite-{{.ID}}" class="favorite-item">
+                    <div class="favorite-star" onclick="toggleFavorite('{{.ID}}', '{{.Name}}', '{{.Image}}', 'favorite')">&#9733;</div>
+                    <img src="{{.Image}}" alt="{{.Name}}" class="favorite-image">
+                    <h3>{{.Name}}</h3>
+                    <button onclick="removeFavorite('{{.ID}}')">Supprimer</button>
+                </div>
+                {{end}}
+            </div>
+        </section>
+    </main>
+    <script src="/static/js/favorites.js"></script>
+</body>
+</html>

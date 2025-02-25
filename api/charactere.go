@@ -2,20 +2,38 @@ package api
 
 import (
     "encoding/json"
-    "net/http"
+    "fmt"
+    
 )
 
-func FetchCharacters() ([]Agent, error) {
-    resp, err := http.Get("https://valorant-api.com/v1/agents")
-    if err != nil {
-        return nil, err
-    }
-    defer resp.Body.Close()
+type Character struct {
+	UUID        string `json:"uuid"`
+	DisplayName string `json:"displayName"`
+	Description string `json:"description"`
+	DeveloperName string `json:"developerName"`
+	CharacterTags []string `json:"characterTags"`
+	DisplayIcon string `json:"displayIcon"`
+	BustPortrait string `json:"bustPortrait"`
+	FullPortrait string `json:"fullPortrait"`
+	KillfeedPortrait string `json:"killfeedPortrait"`
+	Background string `json:"background"`
+	AssetPath string `json:"assetPath"`
+}
 
-    var result Response
-    if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-        return nil, err
-    }
+func FetchCharacters() ([]Character, error) {
+	apiURL := "https://valorant-api.com/v1/agents?isPlayableCharacter=true"
+	body, err := FetchData(apiURL)
+	if err != nil {
+		return nil, err
+	}
 
-    return result.Agents, nil
+	var data struct {
+		Data []Character `json:"data"`
+	}
+	err = json.Unmarshal(body, &data)
+	if err != nil {
+		return nil, fmt.Errorf("Erreur parsing JSON : %v", err)
+	}
+
+	return data.Data, nil
 }

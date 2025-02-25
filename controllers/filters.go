@@ -14,10 +14,10 @@ func HandleFilteredCharacters(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Erreur lors de la récupération des agents.", http.StatusInternalServerError)
 		return
 	}
-	filteredAgents := []api.Agent{}
-	for _, agent := range agents {
-		if strings.Contains(strings.ToLower(agent.Name), strings.ToLower(query)) {
-			filteredAgents = append(filteredAgents, agent)
+	filteredCharacters := []api.Character{}
+	for _, character := range agents {
+		if strings.Contains(strings.ToLower(character.DisplayName), strings.ToLower(query)) {
+			filteredCharacters = append(filteredCharacters, character)
 		}
 	}
 
@@ -27,5 +27,5 @@ func HandleFilteredCharacters(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	tmpl.Execute(w, filteredAgents)
+	tmpl.Execute(w, filteredCharacters)
 }

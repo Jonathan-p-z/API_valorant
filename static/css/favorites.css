@@ -7,24 +7,24 @@ body {
     text-align: center;
 }
 
-.maps {
+.favorites {
     padding: 50px;
     text-align: center;
 }
 
-.maps h2 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
+.favorites h2 {
+    font-size: 2rem;
+    margin-bottom: 40px;
 }
 
-.maps-list {
+.favorites-list {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
 }
 
-.map-item {
+.favorite-item {
     position: relative;
     background-color: #1f2e3d;
     padding: 20px;
@@ -33,22 +33,35 @@ body {
     text-align: center;
 }
 
-.map-item img {
+.favorite-item img {
     max-width: 100%;
     border-radius: 10px;
     margin-bottom: 10px;
 }
 
-.map-item h3 {
+.favorite-item h3 {
     font-size: 1.5rem;
     margin-bottom: 10px;
 }
 
-.map-item a {
+.favorite-item button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ff4655;
     color: #fff;
-    text-decoration: none;
+    cursor: pointer;
 }
 
-.map-item a:hover {
-    color: #ff4655;
+.favorite-item button:hover {
+    background-color: #e03e4e;
+}
+
+.favorite-star {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 1.5rem;
+    color: gold;
+    cursor: pointer;
 }
