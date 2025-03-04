@@ -4,6 +4,7 @@ body {
     padding: 0;
     background-color: #0f1923;
     color: white;
+    overflow-x: hidden;
 }
 
 main {
@@ -12,16 +13,17 @@ main {
 
 #character-details {
     text-align: center;
+    word-wrap: break-word;
 }
 
 .character-image {
-    width: 300px; /* Taille spécifique pour l'image de Sage */
+    width: 300px;
     border-radius: 10px;
     margin: 20px 0;
 }
 
 .ability-image {
-    width: 75px; /* Taille spécifique pour les icônes de compétence */
+    width: 75px;
     height: 75px;
     margin-bottom: 10px;
 }
@@ -39,7 +41,7 @@ main {
     border-radius: 10px;
     padding: 10px;
     text-align: center;
-    width: 200px; /* Taille ajustée pour les cartes de compétence */
+    width: 200px;
 }
 
 .ability button {
@@ -57,7 +59,7 @@ main {
 }
 
 .images-container img {
-    width: 150px; /* Taille moyenne pour les images supplémentaires */
+    width: 150px;
     border-radius: 10px;
 }
 
@@ -83,4 +85,17 @@ main {
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+
+#ability-description {
+    max-width: 800px;
+    margin: 10px auto;
+    word-wrap: break-word;
+}
+
+.character-description {
+    max-width: 800px;
+    margin: 10px auto;
+    word-wrap: break-word;
+    word-break: break-word;
 }

@@ -60,7 +60,7 @@ func loadUsers() error {
 func saveUsers() error {
     // Vérifie et crée le dossier si nécessaire
     dir := "data"
-    if err := os.MkdirAll(dir, 0755); err != nil {
+    if err := os.MkdirAll(dir, 0666); err != nil {
         log.Printf("Error creating directory %s: %v", dir, err)
         return fmt.Errorf("error creating directory: %w", err)
     }
@@ -73,7 +73,7 @@ func saveUsers() error {
     }
 
     // Écrit le fichier avec des permissions plus restrictives
-    if err := os.WriteFile(usersFile, data, 0600); err != nil {
+    if err := os.WriteFile(usersFile, data, 0666); err != nil {
         log.Printf("Failed to write users file: %v", err)
         return fmt.Errorf("error writing users file: %w", err)
     }

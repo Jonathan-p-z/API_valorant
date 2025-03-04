@@ -27,25 +27,28 @@ func main() {
 	http.HandleFunc("/loading", controllers.LoadingHandler)
 	http.HandleFunc("/api/favorites", controllers.AddFavorite)
 	http.HandleFunc("/api/remove-favorite", controllers.RemoveFavorite)
-	http.HandleFunc("/api/users", controllers.GetUsersHandler) // New route for getting users
+	http.HandleFunc("/api/users", controllers.GetUsersHandler)
 	http.Handle("/character/", CheckDataLoaded(http.HandlerFunc(controllers.HandleCharacterDetails)))
+	http.HandleFunc("/about", aboutHandler)
 
 	// Serve static files correctly
 	fs := http.FileServer(http.Dir("./static"))
 	http.Handle("/static/", http.StripPrefix("/static/", fs))
 
 	// Custom error handlers
-	http.HandleFunc("/400", errorHandler(400))
-	http.HandleFunc("/401", errorHandler(401))
-	http.HandleFunc("/403", errorHandler(403))
-	http.HandleFunc("/404", errorHandler(404))
-	http.HandleFunc("/405", errorHandler(405))
-	http.HandleFunc("/408", errorHandler(408))
-	http.HandleFunc("/429", errorHandler(429))
-	http.HandleFunc("/500", errorHandler(500))
-	http.HandleFunc("/502", errorHandler(502))
-	http.HandleFunc("/503", errorHandler(503))
-	http.HandleFunc("/504", errorHandler(504))
+	http.HandleFunc("/400", controllers.ErrorHandler(400))
+	http.HandleFunc("/401", controllers.ErrorHandler(401))
+	http.HandleFunc("/403", controllers.ErrorHandler(403))
+	http.HandleFunc("/404", controllers.ErrorHandler(404))
+	http.HandleFunc("/405", controllers.ErrorHandler(405))
+	http.HandleFunc("/408", controllers.ErrorHandler(408))
+	http.HandleFunc("/429", controllers.ErrorHandler(429))
+	http.HandleFunc("/500", controllers.ErrorHandler(500))
+	http.HandleFunc("/502", controllers.ErrorHandler(502))
+	http.HandleFunc("/503", controllers.ErrorHandler(503))
+	http.HandleFunc("/504", controllers.ErrorHandler(504))
+
+	http.HandleFunc("/", controllers.ErrorHandler(404))
 
 	// Log the exact URL when the server starts
 	serverAddress := "http://localhost:8080/loading"
@@ -82,6 +85,15 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 	tmpl.Execute(w, nil)
 }
 
+func aboutHandler(w http.ResponseWriter, r *http.Request) {
+	tmpl, err := template.ParseFiles("templates/about.html", "templates/header.html", "templates/footer.html")
+	if err != nil {
+		http.Error(w, "Error loading template: "+err.Error(), http.StatusInternalServerError)
+		return
+	}
+	tmpl.Execute(w, nil)
+}
+
 func CheckDataLoaded(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		// Check if data is loaded
@@ -91,22 +103,4 @@ func CheckDataLoaded(next http.Handler) http.Handler {
 		}
 		next.ServeHTTP(w, r)
 	})
-}
-
-func errorHandler(status int) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		w.WriteHeader(status)
-		tmpl, err := template.ParseFiles(
-			"templates/header.html",
-			"templates/footer.html",
-			"templates/error.html",
-		)
-		if err != nil {
-			http.Error(w, "Error loading template: "+err.Error(), http.StatusInternalServerError)
-			return
-		}
-		tmpl.ExecuteTemplate(w, "error.html", map[string]interface{}{
-			"Status": status,
-		})
-	}
 }

@@ -5,6 +5,7 @@ body {
     background-color: #0e1821;
     color: #fff;
     text-align: center;
+    overflow-x: hidden;
 }
 
 nav {

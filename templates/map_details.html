@@ -6,6 +6,7 @@
     <title>Détails de la carte</title>
     <link rel="stylesheet" href="/static/css/map_details.css">
     <link rel="stylesheet" href="/static/css/header.css">
+    <link rel="stylesheet" href="/static/css/footer.css">
 </head>
 <body>
     {{template "header.html" .}}
@@ -17,8 +18,6 @@
             <a href="https://playvalorant.com/fr-fr/maps/" class="btn-more-info" target="_blank">En savoir plus</a>
         </section>
     </main>
-    <footer>
-        <a href="https://github.com/Jonathan-p-z" class="lienGithub">Jonathan Perez</a>
-    </footer>
+    {{template "footer.html" .}}
 </body>
 </html>

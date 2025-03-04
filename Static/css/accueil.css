@@ -10,13 +10,7 @@ body {
     flex-direction: column;
     overflow-x: hidden; /* Prevent horizontal scrolling */
 }
-header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background-color: #1a2634;
-    z-index: 1000;
-}
+
 .logo img {
     height: 40px;
 }
