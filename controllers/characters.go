@@ -389,7 +389,7 @@ func FetchAgentsFromAPI() ([]Agent, error) {
 				case "overdrive":
 					videoURL = "/static/vidéo/neon/overdrive.mp4"
 					isVideo = true
-					case "high gear":
+				case "high gear":
 					videoURL = "/static/vidéo/neon/high_gear.mp4"
 					isVideo = true
 				}
@@ -404,7 +404,7 @@ func FetchAgentsFromAPI() ([]Agent, error) {
 				case "shadow step":
 					videoURL = "/static/vidéo/clove/shadow_step.mp4"
 					isVideo = true
-					case "shadow form":
+				case "shadow form":
 					videoURL = "/static/vidéo/clove/shadow_form.mp4"
 				}
 			case "chamber":
@@ -424,7 +424,7 @@ func FetchAgentsFromAPI() ([]Agent, error) {
 				}
 			case "vyse":
 				switch strings.ToLower(ability.DisplayName) {
-					case "razor vine":
+				case "razor vine":
 					videoURL = "/static/vidéo/vyse/razor_vine.mp4"
 					isVideo = true
 				case "shear":
@@ -437,9 +437,24 @@ func FetchAgentsFromAPI() ([]Agent, error) {
 					videoURL = "/static/vidéo/vyse/steel_garden.mp4"
 					isVideo = true
 				}
+			case "waylay":
+				switch strings.ToLower(ability.DisplayName) {
+				case "saturation":
+					videoURL = "/static/vidéo/waylay/saturation.mp4"
+					isVideo = true
+				case "vitesse lumière":
+					videoURL = "/static/vidéo/waylay/vitesse_lumiere.mp4"
+					isVideo = true
+				case "réfraction":
+					videoURL = "/static/vidéo/waylay/refraction.mp4"
+					isVideo = true
+				case "croisée des chemins":
+					videoURL = "/static/vidéo/waylay/croisee_des_chemins.mp4"
+					isVideo = true
+				}
 				// Add more agents and their abilities here
 			default:
-				videoURL = "/static/video/" + agentName + "/default.mp4"
+				videoURL = "/static/vidéo/" + agentName + "/default.mp4"
 				isVideo = true
 			}
 			agent.Abilities = append(agent.Abilities, Ability{
@@ -532,3 +547,5 @@ func HandleCharacterDetails(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Error executing template: "+err.Error(), http.StatusInternalServerError)
 	}
 }
+
+// Duplicate AddFavoriteHandler function removed

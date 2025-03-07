@@ -2,8 +2,9 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #0f1923;
-    color: white;
+    background-color: #0e1821;
+    color: #fff;
+    text-align: center;
     overflow-x: hidden;
 }
 
@@ -17,9 +18,10 @@ main {
 }
 
 .character-image {
-    width: 300px;
+    max-width: 100%;
     border-radius: 10px;
-    margin: 20px 0;
+    margin-bottom: 10px;
+    width: 400px;
 }
 
 .ability-image {
@@ -69,13 +71,13 @@ main {
 }
 
 #ability-details img {
-    width: 150px; /* Taille moyenne pour l'image de détail de la compétence */
+    width: 150px;
     height: 150px;
     margin-bottom: 10px;
 }
 
 .ability-video {
-    width: 560px; /* Taille spécifique pour la vidéo de la compétence */
+    width: 560px;
     height: 315px;
     margin-bottom: 10px;
     
@@ -98,4 +100,24 @@ main {
     margin: 10px auto;
     word-wrap: break-word;
     word-break: break-word;
+}
+
+.agent-details-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.favorite-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ff4655;
+    color: #fff;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.favorite-button:hover {
+    background-color: #e03e4e;
 }

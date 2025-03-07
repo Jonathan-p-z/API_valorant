@@ -8,7 +8,7 @@ body {
     text-align: center;
     display: flex;
     flex-direction: column;
-    overflow-x: hidden; /* Prevent horizontal scrolling */
+    overflow-x: hidden;
 }
 
 .logo img {
@@ -50,11 +50,11 @@ body {
 
 .hero-content {
     max-width: 50vw;
-    text-align: center; /* Centre le texte à l'intérieur */
+    text-align: center;
 }
 
 .hero-background {
-    display: none; /* Masque l'élément de fond si nécessaire */
+    display: none;
 }
 
 .hero-content h1 {
@@ -226,12 +226,6 @@ body {
     font-size: 1rem;
 }
 
-footer {
-    background-color: #1f2e3d;
-    text-align: center;
-    padding: 20px;
-    margin-top: 50px;
-}
 
 .agent-icon, .map-image, .fanart-image, .img-masterbangkok, .img-agent, .img-map {
     max-width: 100%;
@@ -293,7 +287,6 @@ footer {
     }
 }
 
-/* Appliquer l'animation aux éléments */
 .news-item,
 .news-agent-item,
 .news-cartes-item,

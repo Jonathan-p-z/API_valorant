@@ -9,6 +9,7 @@ function addFavorite(id, name, image, type) {
     .then(response => {
         if (response.ok) {
             alert('Ajouté aux favoris');
+            location.reload();
         } else {
             alert('Erreur lors de l\'ajout aux favoris');
         }
@@ -50,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 favoriteItem.id = `favorite-${favorite.id}`;
                 favoriteItem.classList.add('favorite-item');
                 favoriteItem.innerHTML = `
-                    <div class="favorite-star" onclick="toggleFavorite('${favorite.id}', '${favorite.name}', '${favorite.image}', 'favorite')">&#9733;</div>
+                    <div class="favorite-star" onclick="toggleFavorite('${favorite.id}', '${favorite.name}', '${favorite.image}', '${favorite.type}')">&#9733;</div>
                     <img src="${favorite.image}" alt="${favorite.name}" class="favorite-image">
                     <h3>${favorite.name}</h3>
                     <button onclick="removeFavorite('${favorite.id}')">Supprimer</button>

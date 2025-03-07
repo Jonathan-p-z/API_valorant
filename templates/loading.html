@@ -1,16 +1,25 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chargement...</title>
+    <title>Loading</title>
     <link rel="stylesheet" href="/static/css/loading.css">
 </head>
 <body>
     <div class="loading-container">
-        <h2>Chargement des données...</h2>
-        <div class="progress-bar">
-            <div class="progress"></div>
+        <h1>Loading data...</h1>
+        <div class="progress-circle">
+            <svg class="progress-ring" width="200" height="200">
+                <circle class="progress-ring__circle" stroke="white" stroke-width="4" fill="transparent" r="90" cx="100" cy="100"/>
+            </svg>
+            <div class="progress-text" id="progressText">0%</div>
+        </div>
+        <p>Veuillez patientez...</p>
+        <div class="loading-animation">
+            <div class="loading-dot"></div>
+            <div class="loading-dot"></div>
+            <div class="loading-dot"></div>
         </div>
     </div>
     <script src="/static/js/loading.js"></script>

@@ -4,12 +4,11 @@ import (
 	"encoding/json"
 	"html/template"
 	"net/http"
-	"sync"
+	"time"
 )
 
 var (
-	dataLoaded = false
-	mu         sync.Mutex
+	dataLoaded bool
 )
 
 type Data struct {
@@ -21,7 +20,7 @@ func InitData() {
 	defer mu.Unlock()
 
 	if !dataLoaded {
-		// Simulate data loading
+		time.Sleep(3 * time.Second)
 		dataLoaded = true
 	}
 }
@@ -31,7 +30,6 @@ func LoadData(w http.ResponseWriter, r *http.Request) {
 	defer mu.Unlock()
 
 	if !dataLoaded {
-		// Simulate data loading
 		dataLoaded = true
 	}
 
@@ -50,15 +48,16 @@ func DataLoaded() bool {
 }
 
 func LoadingHandler(w http.ResponseWriter, r *http.Request) {
+	tmpl := template.Must(template.ParseFiles("templates/loading.html"))
+	w.Header().Set("Content-Type", "text/html")
+	tmpl.Execute(w, nil)
+
+	go InitData()
+
+	time.Sleep(2 * time.Second)
+
 	if DataLoaded() {
 		http.Redirect(w, r, "/home", http.StatusTemporaryRedirect)
 		return
 	}
-
-	// Simulate data loading
-	InitData()
-
-	tmpl := template.Must(template.ParseFiles("templates/loading.html"))
-	w.Header().Set("Content-Type", "text/html")
-	tmpl.Execute(w, nil)
 }

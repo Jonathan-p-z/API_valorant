@@ -1,25 +1,24 @@
 function showAbilityDetails(name, description, image, videoURL, isVideo) {
-    console.log("Name:", name);
-    console.log("Description:", description);
-    console.log("Image:", image);
-    console.log("VideoURL:", videoURL);
-    console.log("IsVideo:", isVideo);
+    const abilityDetails = document.getElementById('ability-details');
+    const abilityName = document.getElementById('ability-name');
+    const abilityImage = document.getElementById('ability-image');
+    const abilityDescription = document.getElementById('ability-description');
+    const abilityVideo = document.getElementById('ability-video');
+    const abilityVideoSource = document.getElementById('ability-video-source');
 
-    // Fermer les détails de la compétence actuellement ouverte
-    document.getElementById('ability-details').style.display = 'none';
-    document.getElementById('ability-video').style.display = 'none';
-    document.getElementById('ability-image').style.display = 'none';
+    abilityName.textContent = name;
+    abilityDescription.textContent = description;
 
-    // Mettre à jour les détails de la nouvelle compétence
-    document.getElementById('ability-name').innerText = name;
-    document.getElementById('ability-description').innerText = description;
     if (isVideo) {
-        document.getElementById('ability-video').style.display = 'block';
-        document.getElementById('ability-video-source').src = videoURL;
-        document.getElementById('ability-video').load(); // Recharger la vidéo pour appliquer la nouvelle source
+        abilityImage.style.display = 'none';
+        abilityVideo.style.display = 'block';
+        abilityVideoSource.src = videoURL;
+        abilityVideo.load();
     } else {
-        document.getElementById('ability-image').style.display = 'block';
-        document.getElementById('ability-image').src = videoURL;
+        abilityImage.style.display = 'block';
+        abilityImage.src = image;
+        abilityVideo.style.display = 'none';
     }
-    document.getElementById('ability-details').style.display = 'block';
+
+    abilityDetails.style.display = 'block';
 }

@@ -1,5 +1,4 @@
     document.addEventListener('DOMContentLoaded', () => {
-    // Animation pour les éléments de la grille d'actualités
     const newsItems = document.querySelectorAll('.news-item');
     newsItems.forEach((item, index) => {
         item.style.opacity = '0';

@@ -1,9 +1,10 @@
 header {
-    background-color: #ff4655;
-    padding: 20px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
+    background-color: #e03e4e;
+    padding: 10px 20px;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .header-container {
@@ -22,12 +23,12 @@ header {
 
 header h1 {
     margin: 0;
-    color: white;
-    font-size: 2em;
+    font-size: 1.5rem;
 }
 
 nav {
-    text-align: center;
+    display: flex;
+    gap: 20px;
 }
 
 nav ul {
@@ -45,6 +46,16 @@ nav ul li a {
     color: white;
     text-decoration: none;
     font-size: 1.2em;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+nav a:hover {
+    text-decoration: underline;
 }
 
 .search-container {
@@ -75,7 +86,7 @@ nav ul li a {
 }
 
 .search-container button:hover {
-    background-color: #e03e4e;
+    background-color: #441419;
 }
 
 .header-rediretion-home {

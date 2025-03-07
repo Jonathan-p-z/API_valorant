@@ -6,7 +6,6 @@ import (
 	"net/http"
 )
 
-// FetchData récupère des données d'une API externe
 func FetchData(apiURL string) ([]byte, error) {
 	resp, err := http.Get(apiURL)
 	if err != nil {
@@ -26,10 +25,6 @@ func FetchData(apiURL string) ([]byte, error) {
 	return body, nil
 }
 
-// Structure pour représenter un agent
-
-
-// FetchAgents récupère la liste des agents depuis l'API Valorant
 func FetchAgents() ([]Agent, error) {
 	const url = "https://valorant-api.com/v1/agents"
 	resp, err := http.Get(url)

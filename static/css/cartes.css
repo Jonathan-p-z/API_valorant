@@ -54,3 +54,17 @@ body {
 .map-item a:hover {
     color: #ff4655;
 }
+
+.favorite-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ff4655;
+    color: #fff;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.favorite-button:hover {
+    background-color: #e03e4e;
+}

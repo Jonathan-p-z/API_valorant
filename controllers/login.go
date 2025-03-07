@@ -24,7 +24,6 @@ var (
 const usersFile = "data/users.json"
 
 func init() {
-	// Initialize users map
 	err := loadUsers()
 	if err != nil {
 		log.Printf("Error loading users during initialization: %v", err)
@@ -58,26 +57,20 @@ func loadUsers() error {
 }
 
 func saveUsers() error {
-    // Vérifie et crée le dossier si nécessaire
     dir := "data"
     if err := os.MkdirAll(dir, 0666); err != nil {
         log.Printf("Error creating directory %s: %v", dir, err)
         return fmt.Errorf("error creating directory: %w", err)
     }
-
-    // Convertit la map users en JSON formaté
     data, err := json.MarshalIndent(users, "", "  ")
     if err != nil {
         log.Printf("Failed to encode users: %v", err)
         return fmt.Errorf("error encoding users to JSON: %w", err)
     }
-
-    // Écrit le fichier avec des permissions plus restrictives
     if err := os.WriteFile(usersFile, data, 0666); err != nil {
         log.Printf("Failed to write users file: %v", err)
         return fmt.Errorf("error writing users file: %w", err)
     }
-
     log.Println("Users successfully saved to users.json")
     return nil
 }

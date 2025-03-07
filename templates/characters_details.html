@@ -7,16 +7,24 @@
     <link rel="stylesheet" href="/static/css/character_details.css">
     <link rel="stylesheet" href="/static/css/header.css">
     <link rel="stylesheet" href="/static/css/footer.css">
+    <link rel="stylesheet" href="/static/css/favorites.css">
 </head>
 <body>
     {{template "header.html" .}}
     <main>
         <section id="character-details">
             <h2>{{.Name}}</h2>
-            <img class="character-image" src="{{.Image}}" alt="{{.Name}}">
+            <div class="agent-details-container">
+                <img class="character-image" src="{{.Image}}" alt="{{.Name}}">
+                <form method="POST" action="/add-favorite">
+                    <input type="hidden" name="id" value="{{.Name}}">
+                    <input type="hidden" name="name" value="{{.Name}}">
+                    <input type="hidden" name="image" value="{{.Image}}">
+                    <input type="hidden" name="type" value="character">
+                    <button type="submit" class="favorite-button">Ajouter aux favoris</button>
+                </form>
+            </div>
             <p class="character-description">{{.Description}}</p>
-            <h3>Passif</h3>
-            <p>{{.Passive}}</p>
             <h3>Compétences</h3>
             <div class="abilities-container">
                 {{range .Abilities}}

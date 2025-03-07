@@ -27,6 +27,7 @@
                             <li>Temps de rechargement : {{.ReloadTime}} secondes</li>
                         </ul>
                     </div>
+                    
                     {{end}}
                     {{end}}
                 </div>
@@ -45,6 +46,7 @@
                             <li>Capacité du chargeur : {{.MagazineSize}} balles</li>
                             <li>Temps de rechargement : {{.ReloadTime}} secondes</li>
                         </ul>
+                        
                     </div>
                     {{end}}
                     {{end}}
@@ -64,6 +66,7 @@
                             <li>Capacité du chargeur : {{.MagazineSize}} balles</li>
                             <li>Temps de rechargement : {{.ReloadTime}} secondes</li>
                         </ul>
+                        
                     </div>
                     {{end}}
                     {{end}}
@@ -83,6 +86,7 @@
                             <li>Capacité du chargeur : {{.MagazineSize}} balles</li>
                             <li>Temps de rechargement : {{.ReloadTime}} secondes</li>
                         </ul>
+                        
                     </div>
                     {{end}}
                     {{end}}
@@ -97,6 +101,7 @@
                         <img src="{{.Image}}" alt="{{.Name}}">
                         <h3>{{.Name}}</h3>
                         <p>{{.Description}}</p>
+
                     </div>
                     {{end}}
                     {{end}}
@@ -116,6 +121,7 @@
                             <li>Capacité du chargeur : {{.MagazineSize}} balles</li>
                             <li>Temps de rechargement : {{.ReloadTime}} secondes</li>
                         </ul>
+                        
                     </div>
                     {{end}}
                     {{end}}
@@ -135,7 +141,7 @@
                             <li>Capacité du chargeur : {{.MagazineSize}} balles</li>
                             <li>Temps de rechargement : {{.ReloadTime}} secondes</li>
                         </ul>
-                    </div>
+                        </div>
                     {{end}}
                     {{end}}
                 </div>
@@ -143,5 +149,6 @@
         </section>
     </main>
     {{template "footer.html" .}}
+    <script src="/static/js/favorites.js"></script>
 </body>
 </html>

@@ -8,7 +8,6 @@ import (
 )
 
 func main() {
-	// Initialize data at startup
 	controllers.InitData()
 
 	http.Handle("/characters", CheckDataLoaded(http.HandlerFunc(controllers.HandleCharacters)))
@@ -25,17 +24,17 @@ func main() {
 	http.HandleFunc("/login", controllers.LoginHandler)
 	http.HandleFunc("/signup", controllers.SignupHandler)
 	http.HandleFunc("/loading", controllers.LoadingHandler)
+	http.HandleFunc("/load-data", controllers.LoadData)
 	http.HandleFunc("/api/favorites", controllers.AddFavorite)
 	http.HandleFunc("/api/remove-favorite", controllers.RemoveFavorite)
 	http.HandleFunc("/api/users", controllers.GetUsersHandler)
 	http.Handle("/character/", CheckDataLoaded(http.HandlerFunc(controllers.HandleCharacterDetails)))
+	http.HandleFunc("/add-favorite", controllers.AddFavoriteHandler)
 	http.HandleFunc("/about", aboutHandler)
 
-	// Serve static files correctly
 	fs := http.FileServer(http.Dir("./static"))
 	http.Handle("/static/", http.StripPrefix("/static/", fs))
 
-	// Custom error handlers
 	http.HandleFunc("/400", controllers.ErrorHandler(400))
 	http.HandleFunc("/401", controllers.ErrorHandler(401))
 	http.HandleFunc("/403", controllers.ErrorHandler(403))
@@ -50,8 +49,7 @@ func main() {
 
 	http.HandleFunc("/", controllers.ErrorHandler(404))
 
-	// Log the exact URL when the server starts
-	serverAddress := "http://localhost:8080/loading"
+	serverAddress := "http://localhost:8080/login"
 	log.Printf("Server started on %s", serverAddress)
 	log.Println("You can access the application at:", serverAddress)
 
