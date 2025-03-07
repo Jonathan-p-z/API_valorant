@@ -12,143 +12,51 @@
     {{template "header.html" .}}
     <main>
         <section id="weapons">
+            <form class="filter-form" method="GET" action="#">
+                <label for="weapon-type">Type d'arme:</label>
+                <select id="weapon-type" name="type">
+                    <option value="Tous">Tous</option>
+                    <option value="EEquippableCategory::Sidearm">Armes de poing</option>
+                    <option value="EEquippableCategory::SMG">PM</option>
+                    <option value="EEquippableCategory::Shotgun">Fusils à pompe</option>
+                    <option value="EEquippableCategory::LMG">Mitrailleuses</option>
+                    <option value="EEquippableCategory::Melee">Mêlée</option>
+                    <option value="EEquippableCategory::Rifle">Fusils</option>
+                    <option value="EEquippableCategory::Sniper">Snipers</option>
+                </select>
+                <label for="fire-rate">Cadence de tir:</label>
+                <select id="fire-rate" name="fireRate">
+                    <option value="">Tous</option>
+                    <option value="above">Au-dessus de 8</option>
+                    <option value="below">En dessous de 8</option>
+                </select>
+                <button type="submit">Filtrer</button>
+            </form>
+            <div id="no-results-message" style="display: none; font-size: 1.5em; text-align: center; margin-top: 20px;">Aucun résultat correspondant à votre demande.</div>
+            {{range $type, $weapons := .CategorizedWeapons}}
             <div class="weapons-category">
-                <h2>Armes de poing</h2>
+                <h2>{{getWeaponTypeName $type}}</h2>
                 <div class="weapons-container">
-                    {{range .Weapons}}
-                    {{if eq .Type "EEquippableCategory::Sidearm"}}
-                    <div class="weapon-card">
-                        <img src="{{.Image}}" alt="{{.Name}}">
-                        <h3>{{.Name}}</h3>
+                    {{range $weapons}}
+                    <div class="weapon-card" data-type="{{.Type}}" data-fire-rate="{{.FireRate}}">
+                        <img src="{{.DisplayIcon}}" alt="{{.DisplayName}}">
+                        <h3>{{.DisplayName}}</h3>
                         <p>{{.Description}}</p>
                         <ul>
                             <li>Cadence de tir : {{.FireRate}} coups par seconde</li>
                             <li>Capacité du chargeur : {{.MagazineSize}} balles</li>
                             <li>Temps de rechargement : {{.ReloadTime}} secondes</li>
                         </ul>
-                    </div>
-                    
-                    {{end}}
-                    {{end}}
-                </div>
-            </div>
-            <div class="weapons-category">
-                <h2>PM</h2>
-                <div class="weapons-container">
-                    {{range .Weapons}}
-                    {{if eq .Type "EEquippableCategory::SMG"}}
-                    <div class="weapon-card">
-                        <img src="{{.Image}}" alt="{{.Name}}">
-                        <h3>{{.Name}}</h3>
-                        <p>{{.Description}}</p>
-                        <ul>
-                            <li>Cadence de tir : {{.FireRate}} coups par seconde</li>
-                            <li>Capacité du chargeur : {{.MagazineSize}} balles</li>
-                            <li>Temps de rechargement : {{.ReloadTime}} secondes</li>
-                        </ul>
-                        
+                        <button type="button" class="favorite-button" onclick="addFavorite('{{.UUID}}', '{{.DisplayName}}', '{{.DisplayIcon}}', 'weapon')">Ajouter aux favoris</button>
                     </div>
                     {{end}}
-                    {{end}}
                 </div>
             </div>
-            <div class="weapons-category">
-                <h2>Fusils à pompe</h2>
-                <div class="weapons-container">
-                    {{range .Weapons}}
-                    {{if eq .Type "EEquippableCategory::Shotgun"}}
-                    <div class="weapon-card">
-                        <img src="{{.Image}}" alt="{{.Name}}">
-                        <h3>{{.Name}}</h3>
-                        <p>{{.Description}}</p>
-                        <ul>
-                            <li>Cadence de tir : {{.FireRate}} coups par seconde</li>
-                            <li>Capacité du chargeur : {{.MagazineSize}} balles</li>
-                            <li>Temps de rechargement : {{.ReloadTime}} secondes</li>
-                        </ul>
-                        
-                    </div>
-                    {{end}}
-                    {{end}}
-                </div>
-            </div>
-            <div class="weapons-category">
-                <h2>Mitrailleuses</h2>
-                <div class="weapons-container">
-                    {{range .Weapons}}
-                    {{if eq .Type "EEquippableCategory::LMG"}}
-                    <div class="weapon-card">
-                        <img src="{{.Image}}" alt="{{.Name}}">
-                        <h3>{{.Name}}</h3>
-                        <p>{{.Description}}</p>
-                        <ul>
-                            <li>Cadence de tir : {{.FireRate}} coups par seconde</li>
-                            <li>Capacité du chargeur : {{.MagazineSize}} balles</li>
-                            <li>Temps de rechargement : {{.ReloadTime}} secondes</li>
-                        </ul>
-                        
-                    </div>
-                    {{end}}
-                    {{end}}
-                </div>
-            </div>
-            <div class="weapons-category">
-                <h2>Mêlée</h2>
-                <div class="weapons-container">
-                    {{range .Weapons}}
-                    {{if eq .Type "EEquippableCategory::Melee"}}
-                    <div class="weapon-card">
-                        <img src="{{.Image}}" alt="{{.Name}}">
-                        <h3>{{.Name}}</h3>
-                        <p>{{.Description}}</p>
-
-                    </div>
-                    {{end}}
-                    {{end}}
-                </div>
-            </div>
-            <div class="weapons-category">
-                <h2>Fusils</h2>
-                <div class="weapons-container">
-                    {{range .Weapons}}
-                    {{if eq .Type "EEquippableCategory::Rifle"}}
-                    <div class="weapon-card">
-                        <img src="{{.Image}}" alt="{{.Name}}">
-                        <h3>{{.Name}}</h3>
-                        <p>{{.Description}}</p>
-                        <ul>
-                            <li>Cadence de tir : {{.FireRate}} coups par seconde</li>
-                            <li>Capacité du chargeur : {{.MagazineSize}} balles</li>
-                            <li>Temps de rechargement : {{.ReloadTime}} secondes</li>
-                        </ul>
-                        
-                    </div>
-                    {{end}}
-                    {{end}}
-                </div>
-            </div>
-            <div class="weapons-category">
-                <h2>Snipers</h2>
-                <div class="weapons-container">
-                    {{range .Weapons}}
-                    {{if eq .Type "EEquippableCategory::Sniper"}}
-                    <div class="weapon-card">
-                        <img src="{{.Image}}" alt="{{.Name}}">
-                        <h3>{{.Name}}</h3>
-                        <p>{{.Description}}</p>
-                        <ul>
-                            <li>Cadence de tir : {{.FireRate}} coups par seconde</li>
-                            <li>Capacité du chargeur : {{.MagazineSize}} balles</li>
-                            <li>Temps de rechargement : {{.ReloadTime}} secondes</li>
-                        </ul>
-                        </div>
-                    {{end}}
-                    {{end}}
-                </div>
-            </div>
+            {{end}}
         </section>
     </main>
     {{template "footer.html" .}}
     <script src="/static/js/favorites.js"></script>
+    <script src="/static/js/filters.js"></script>
 </body>
 </html>

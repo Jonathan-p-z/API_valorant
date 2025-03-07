@@ -14,6 +14,7 @@ func main() {
 	http.Handle("/characters/search", CheckDataLoaded(http.HandlerFunc(controllers.HandleSearch)))
 	http.Handle("/characters/filter", CheckDataLoaded(http.HandlerFunc(controllers.HandleFilteredCharacters)))
 	http.Handle("/weapons", CheckDataLoaded(http.HandlerFunc(controllers.HandleWeapons)))
+	http.HandleFunc("/filtered_weapons", controllers.HandleFilteredWeapons)
 	http.Handle("/maps", CheckDataLoaded(http.HandlerFunc(controllers.HandleMaps)))
 	http.Handle("/maps/details", CheckDataLoaded(http.HandlerFunc(controllers.HandleMapDetails)))
 	http.Handle("/search", CheckDataLoaded(http.HandlerFunc(controllers.HandleSearch)))

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Armes Filtrées</title>
+    <link rel="stylesheet" href="/static/css/weapons.css">
+    <link rel="stylesheet" href="/static/css/header.css">
+    <link rel="stylesheet" href="/static/css/footer.css">
+</head>
+<body>
+    {{template "header.html" .}}
+    <main>
+        <section id="filtered-weapons">
+            <h2>Résultats du Filtre</h2>
+            <div class="weapons-container">
+                {{range .Weapons}}
+                <div class="weapon-card" data-type="{{.Type}}" data-fire-rate="{{.FireRate}}">
+                    <img src="{{.DisplayIcon}}" alt="{{.DisplayName}}">
+                    <h3>{{.DisplayName}}</h3>
+                    <p>{{.Description}}</p>
+                    <ul>
+                        <li>Cadence de tir : {{.FireRate}} coups par seconde</li>
+                        <li>Capacité du chargeur : {{.MagazineSize}} balles</li>
+                        <li>Temps de rechargement : {{.ReloadTime}} secondes</li>
+                    </ul>
+                    <button type="button" class="favorite-button" onclick="addFavorite('{{.UUID}}', '{{.DisplayName}}', '{{.DisplayIcon}}', 'weapon')">Ajouter aux favoris</button>
+                </div>
+                {{else}}
+                <p>Aucun résultat trouvé.</p>
+                {{end}}
+            </div>
+        </section>
+    </main>
+    {{template "footer.html" .}}
+    <script src="/static/js/favorites.js"></script>
+</body>
+</html>
