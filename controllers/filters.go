@@ -1,10 +1,10 @@
 package controllers
 
 import (
+	"api_valorant/api"
 	"html/template"
 	"net/http"
 	"strings"
-	"api_valorant/api"
 )
 
 func HandleFilteredCharacters(w http.ResponseWriter, r *http.Request) {

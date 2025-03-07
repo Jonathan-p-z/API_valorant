@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results - Valorant</title>
+    <link rel="stylesheet" href="/static/css/characters.css">
+    <link rel="stylesheet" href="/static/css/header.css">
+    <link rel="stylesheet" href="/static/css/footer.css">
+</head>
+<body>
+    {{template "header.html" .}}
+    <main>
+        <section id="search-results">
+            <h2>Résultats de recherche</h2>
+            <form method="GET" action="/search">
+                <input type="text" name="query" placeholder="Rechercher...">
+                <select name="type">
+                    <option value="">Tous</option>
+                    <option value="characters">Personnages</option>
+                    <option value="weapons">Armes</option>
+                    <option value="maps">Cartes</option>
+                </select>
+                <button type="submit">Rechercher</button>
+            </form>
+            <div class="results-container">
+                {{range .}}
+                <div class="result-card">
+                    <h3>{{.Name}}</h3>
+                    <p>{{.Description}}</p>
+                    <p>Similarité: {{printf "%.2f" .Percentage}}%</p>
+                </div>
+                {{end}}
+            </div>
+        </section>
+    </main>
+    {{template "footer.html" .}}    
+</body>
+</html>

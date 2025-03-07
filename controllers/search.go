@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"api_valorant/api"
+	"fmt"
 	"html/template"
 	"log"
 	"net/http"
@@ -159,14 +160,17 @@ func searchAll(query string, agents []api.Character, weapons []api.Weapon, maps 
 	var searchResults []SearchResult
 
 	addResult := func(name, image, description, link string, percentage float64) {
+		formattedPercentage := fmt.Sprintf("%.2f", percentage)
+		percentageValue, _ := strconv.ParseFloat(formattedPercentage, 64)
 		searchResults = append(searchResults, SearchResult{
 			Name:        name,
 			Image:       image,
 			Description: description,
 			Link:        link,
-			Percentage:  percentage,
+			Percentage:  percentageValue,
 		})
 	}
+
 	switch query {
 	case "agents", "characters":
 		for _, agent := range agents {
