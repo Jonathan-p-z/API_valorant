@@ -25,16 +25,28 @@
      - Nom
      - Type d’arme (Fusil, Pistolet, etc.)
      - Image de l’arme.
+     - Cadence de tir
+     - Capacité du chargeur
+     - Temps de rechargement
 
-4. **Recherche et filtres** :
+4. **Liste des cartes** :
+   - Affiche toutes les cartes disponibles dans le jeu.
+   - Informations détaillées sur chaque carte :
+     - Nom
+     - Image de la carte
+
+5. **Recherche et filtres** :
    - **Recherche** : Trouvez rapidement un agent ou une arme en entrant un mot-clé.
-   - **Filtres** : Affinez les résultats selon des critères spécifiques (ex : rôle pour les agents).
+   - **Filtres** : Affinez les résultats selon des critères spécifiques (ex : rôle pour les agents, type d'arme).
 
-5. **Affichage des résultats de recherche** :
+6. **Affichage des résultats de recherche** :
    - Résultats dynamiques basés sur les mots-clés ou filtres appliqués.
 
-6. **Page À propos** :
+7. **Page À propos** :
    - Présente des informations sur le projet et l'équipe de développement.
+
+8. **Favoris** :
+   - Ajoutez des agents, armes ou cartes à vos favoris pour un accès rapide.
 
 ---
 
@@ -42,8 +54,8 @@
 - **Langages** :
   - Go (Golang) : Back-end et logique métier.
   - HTML, CSS : Front-end et interface utilisateur.
-  - JS : Animation Front-end et animation .
-  - Json : Back-end pour le stockage des données.
+  - JavaScript : Animation Front-end et interactivité.
+  - JSON : Back-end pour le stockage des données.
 
 - **APIs** :
   - API officielle de Valorant pour récupérer les données dynamiques :
@@ -93,11 +105,13 @@
 |-------------------------|----------------------------------------|
 | `/login`                | Page de connexion.                     |
 | `/characters`           | Liste des agents Valorant.             |
+| `/characters/details`   | Détails d'un agents spécifiques.       |
 | `/characters/search`    | Recherche d'agents par mot-clé.        |
-| `/characters/filter`    | Filtrage des agents par critère.       |
 | `/weapons`              | Liste des armes Valorant.              |
+| `/filtered_weapons`     | Filtrage des armes par critère.        |
 | `/maps`                 | Liste des cartes Valorant.             |
 | `/maps/details`         | Détails d'une carte spécifique.        |
+| `/fav`                  | Liste des favoris de l'utilisateur.    |
 | `/about`                | Page À propos du projet.               |
 
 ---
@@ -112,6 +126,11 @@
 ### **Filtrage des agents :**
 1. Naviguez vers `/characters/filter`.
 2. Appliquez un filtre (ex : "Rôle = Duelist").
+3. La liste sera mise à jour automatiquement.
+
+### **Filtrage des armes :**
+1. Naviguez vers `/weapons`.
+2. Appliquez un filtre (ex : "Type d'arme = Fusils", "Cadence de tir = Au-dessus de 8").
 3. La liste sera mise à jour automatiquement.
 
 ---
