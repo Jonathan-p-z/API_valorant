@@ -395,17 +395,18 @@ func FetchAgentsFromAPI() ([]Agent, error) {
 				}
 			case "clove":
 				switch strings.ToLower(ability.DisplayName) {
-				case "blinding light":
-					videoURL = "/static/vidéo/clove/blinding_light.mp4"
+				case "meddle":
+					videoURL = "/static/vidéo/clove/meddle.mp4"
 					isVideo = true
-				case "smoke screen":
-					videoURL = "/static/vidéo/clove/smoke_screen.mp4"
+				case "not dead yet":
+					videoURL = "/static/vidéo/clove/not_dead_yet.mp4"
 					isVideo = true
-				case "shadow step":
-					videoURL = "/static/vidéo/clove/shadow_step.mp4"
+				case "pick me up":
+					videoURL = "/static/vidéo/clove/pick_me_up.mp4"
 					isVideo = true
-				case "shadow form":
-					videoURL = "/static/vidéo/clove/shadow_form.mp4"
+				case "ruse":
+					videoURL = "/static/vidéo/clove/ruse.mp4"
+					isVideo = true
 				}
 			case "chamber":
 				switch strings.ToLower(ability.DisplayName) {

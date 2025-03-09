@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"os"
 	"sync"
+	"golang.org/x/crypto/bcrypt"
 )
 
 type User struct {
@@ -57,24 +58,23 @@ func loadUsers() error {
 }
 
 func saveUsers() error {
-    dir := "data"
-    if err := os.MkdirAll(dir, 0666); err != nil {
-        log.Printf("Error creating directory %s: %v", dir, err)
-        return fmt.Errorf("error creating directory: %w", err)
-    }
-    data, err := json.MarshalIndent(users, "", "  ")
-    if err != nil {
-        log.Printf("Failed to encode users: %v", err)
-        return fmt.Errorf("error encoding users to JSON: %w", err)
-    }
-    if err := os.WriteFile(usersFile, data, 0666); err != nil {
-        log.Printf("Failed to write users file: %v", err)
-        return fmt.Errorf("error writing users file: %w", err)
-    }
-    log.Println("Users successfully saved to users.json")
-    return nil
+	dir := "data"
+	if err := os.MkdirAll(dir, 0666); err != nil {
+		log.Printf("Error creating directory %s: %v", dir, err)
+		return fmt.Errorf("error creating directory: %w", err)
+	}
+	data, err := json.MarshalIndent(users, "", "  ")
+	if err != nil {
+		log.Printf("Failed to encode users: %v", err)
+		return fmt.Errorf("error encoding users to JSON: %w", err)
+	}
+	if err := os.WriteFile(usersFile, data, 0666); err != nil {
+		log.Printf("Failed to write users file: %v", err)
+		return fmt.Errorf("error writing users file: %w", err)
+	}
+	log.Println("Users successfully saved to users.json")
+	return nil
 }
-
 
 func SignupHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodGet {
@@ -98,10 +98,17 @@ func SignupHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(r.FormValue("password")), bcrypt.DefaultCost)
+	if err != nil {
+		log.Printf("Error hashing password: %v", err)
+		http.Error(w, "Error hashing password", http.StatusInternalServerError)
+		return
+	}
+
 	newUser := User{
 		Username: r.FormValue("username"),
 		Email:    r.FormValue("email"),
-		Password: r.FormValue("password"),
+		Password: string(hashedPassword),
 	}
 
 	log.Printf("Signup attempt: username=%s, email=%s", newUser.Username, newUser.Email)
@@ -172,7 +179,7 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	user, exists := users[credentials.Email]
-	if !exists || user.Password != credentials.Password {
+	if !exists || bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(credentials.Password)) != nil {
 		http.Error(w, "Invalid email or password", http.StatusUnauthorized)
 		return
 	}

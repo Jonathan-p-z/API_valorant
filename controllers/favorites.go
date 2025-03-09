@@ -5,12 +5,10 @@ import (
 	"html/template"
 	"net/http"
 	"os"
-	"sync"
 )
 
 var (
 	favoritesFile = "data/favorites.json"
-	mu            sync.Mutex
 )
 
 type Favorite struct {
@@ -44,7 +42,9 @@ func saveFavorites(favorites []Favorite) error {
 	}
 	defer file.Close()
 
-	return json.NewEncoder(file).Encode(favorites)
+	encoder := json.NewEncoder(file)
+	encoder.SetIndent("", "    ") // Format JSON with indentation
+	return encoder.Encode(favorites)
 }
 
 func AddFavorite(w http.ResponseWriter, r *http.Request) {

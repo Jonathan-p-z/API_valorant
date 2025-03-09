@@ -50,7 +50,7 @@ func main() {
 
 	http.HandleFunc("/", controllers.ErrorHandler(404))
 
-	serverAddress := "http://localhost:8080/login"
+	serverAddress := "http://localhost:8080/loading"
 	log.Printf("Server started on %s", serverAddress)
 	log.Println("You can access the application at:", serverAddress)
 
@@ -95,7 +95,6 @@ func aboutHandler(w http.ResponseWriter, r *http.Request) {
 
 func CheckDataLoaded(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		// Check if data is loaded
 		if !controllers.DataLoaded() {
 			http.Redirect(w, r, "/loading", http.StatusTemporaryRedirect)
 			return

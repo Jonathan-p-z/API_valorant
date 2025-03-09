@@ -1,1 +1,8 @@
-[{"id":"Fade","name":"Fade","image":"https://media.valorant-api.com/agents/dade69b4-4f5a-8528-247b-219e5a1facd6/fullportrait.png","type":"character"},{"id":"b529448b-4d60-346e-e89e-00a4c527a405","name":"Fracture","image":"https://media.valorant-api.com/maps/b529448b-4d60-346e-e89e-00a4c527a405/splash.png","type":"map"},{"id":"ee8e8d15-496b-07ac-e5f6-8fae5d4c7b1a","name":"Phantom","image":"https://media.valorant-api.com/weapons/ee8e8d15-496b-07ac-e5f6-8fae5d4c7b1a/displayicon.png","type":"weapon"}]
+[
+    {
+        "id": "b529448b-4d60-346e-e89e-00a4c527a405",
+        "name": "Fracture",
+        "image": "https://media.valorant-api.com/maps/b529448b-4d60-346e-e89e-00a4c527a405/splash.png",
+        "type": "map"
+    }
+]

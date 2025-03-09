@@ -4,11 +4,13 @@ import (
 	"encoding/json"
 	"html/template"
 	"net/http"
+	"sync"
 	"time"
 )
 
 var (
 	dataLoaded bool
+	mu         sync.Mutex
 )
 
 type Data struct {
@@ -20,7 +22,7 @@ func InitData() {
 	defer mu.Unlock()
 
 	if !dataLoaded {
-		time.Sleep(3 * time.Second)
+		time.Sleep(3 * time.Second) // Simulate data loading
 		dataLoaded = true
 	}
 }
@@ -52,12 +54,15 @@ func LoadingHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
 	tmpl.Execute(w, nil)
 
-	go InitData()
+	go func() {
+		InitData()
+	}()
 
-	time.Sleep(2 * time.Second)
-
-	if DataLoaded() {
-		http.Redirect(w, r, "/home", http.StatusTemporaryRedirect)
-		return
+	for {
+		if DataLoaded() {
+			http.Redirect(w, r, "/login", http.StatusSeeOther)
+			return
+		}
+		time.Sleep(100 * time.Millisecond)
 	}
 }

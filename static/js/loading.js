@@ -21,7 +21,7 @@ function updateProgress() {
     if (progress < 100) {
         setTimeout(updateProgress, 500);
     } else {
-        window.location.href = '/home';
+        window.location.href = '/login';
     }
 }
 
