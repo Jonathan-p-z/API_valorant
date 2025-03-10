@@ -274,7 +274,6 @@ body {
     background-color: #e03e4e;
 }
 
-/* Ajout de l'animation */
 @keyframes fadeIn {
     from {
         opacity: 0;

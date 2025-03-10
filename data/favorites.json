@@ -4,5 +4,11 @@
         "name": "Fracture",
         "image": "https://media.valorant-api.com/maps/b529448b-4d60-346e-e89e-00a4c527a405/splash.png",
         "type": "map"
+    },
+    {
+        "id": "55d8a0f4-4274-ca67-fe2c-06ab45efdf58",
+        "name": "Ares",
+        "image": "https://media.valorant-api.com/weapons/55d8a0f4-4274-ca67-fe2c-06ab45efdf58/displayicon.png",
+        "type": "weapon"
     }
 ]
