@@ -1,0 +1,3 @@
+# Binaries/installers accidentally added to the repo
+/Static/img/*.exe
+/static/img/*.exe

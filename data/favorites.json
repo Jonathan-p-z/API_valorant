@@ -1,14 +1,8 @@
 [
     {
-        "id": "b529448b-4d60-346e-e89e-00a4c527a405",
-        "name": "Fracture",
-        "image": "https://media.valorant-api.com/maps/b529448b-4d60-346e-e89e-00a4c527a405/splash.png",
-        "type": "map"
-    },
-    {
-        "id": "55d8a0f4-4274-ca67-fe2c-06ab45efdf58",
-        "name": "Ares",
-        "image": "https://media.valorant-api.com/weapons/55d8a0f4-4274-ca67-fe2c-06ab45efdf58/displayicon.png",
+        "id": "63e6c2b6-4a8e-869c-3d4c-e38355226584",
+        "name": "Odin",
+        "image": "https://media.valorant-api.com/weapons/63e6c2b6-4a8e-869c-3d4c-e38355226584/displayicon.png",
         "type": "weapon"
     }
 ]
